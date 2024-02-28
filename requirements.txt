@@ -13,4 +13,4 @@ torchvision>=0.8.1
 tqdm>=4.64.0
 filterpy
 scikit-image
-lap
+lapx
