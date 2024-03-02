@@ -14,3 +14,4 @@ tqdm>=4.64.0
 filterpy
 scikit-image
 lapx
+django
