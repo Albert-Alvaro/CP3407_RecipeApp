@@ -1,4 +1,0 @@
-## Journal of the development process documented from the perspective of Albert Alvaro (14328932)
-
-### 13/3/2024
-Today I had started with actually revising my knowledge of Python by reading a Python primer that provided with the refresher I need to get back into the Python development process.I I had initialized the applicaiton section of the django project.Moreover, following the plan which we had created I had started with coding the Django models which are the equivalent to the database schema of typicial SQL databases. I had coded it to be faithful to the source material whihc was the ERD which we had created but there will probably be a need to change the model, however if we do not have to change the models, than we will be satisfied as that would meant hat we had sufficiently planned ahead.
