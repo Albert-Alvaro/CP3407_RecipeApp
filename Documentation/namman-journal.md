@@ -13,10 +13,10 @@ As for risks, there are some to mention...the first one comes with the hardware 
 secondly, if the llm might cause an issue working with further there are plans to assist the web application with a web-scrapper instead.
 
 ### Personal Notes
-20/3/24, 4:17 am : I am currently trying to scout a good model for recipe generation and check it's specs. the exact specs im looking for might jump around atleast 12 layers and 768 hidden units per layers. Pre-trained (so its easier to start with) using adam optimizer; rate of learning set to 1e-4 and batch size 32 for 10 epochs. I was thinking of fine tuning it using seq. lenght of 512 tokens and a perplexity loss function so its apt for reciepe generation because i need to think about the different cultural cuisine and dietary preferences with creativity control on the responses (maybe use a temprature sampling strategy).
+20/3/24
+4:17 am : I am currently trying to scout a good model for recipe generation and check it's specs. the exact specs im looking for might jump around atleast 12 layers and 768 hidden units per layers. Pre-trained (so its easier to start with) using adam optimizer; rate of learning set to 1e-4 and batch size 32 for 10 epochs. I was thinking of fine tuning it using seq. lenght of 512 tokens and a perplexity loss function so its apt for reciepe generation because i need to think about the different cultural cuisine and dietary preferences with creativity control on the responses (maybe use a temprature sampling strategy).
 
-6:20 am : I was able to code a small python program which mimics the concept of the web application where the user inputs the ingredients present in their fridge, for now this does not have a database or input validation since the llm is in the testing phase. Using a model, particularly for recipe generation i found on hugging face meeting some of the requirements. for now the program is something like a bot and responses are not polished or trained at all so EXPECT ERRORS AND UNTRAINED RESPONSES.
-
+6:20 am : I was able to code a small python program which mimics the concept of the web application where the user inputs the ingredients present in their fridge, for now this does not have a database or input validation since the llm is in the testing phase. Using a [model](https://huggingface.co/PoojaBhati/recipe-ingredient-Mistral-7b-GGUF), particularly for recipe generation i found on hugging face meeting some of the requirements. for now the program is something like a bot and responses are not polished or trained at all so EXPECT ERRORS AND UNTRAINED RESPONSES.
 
 
 
