@@ -28,4 +28,8 @@ class Recipe_History(models.Model):
     user_id = models.ForeignKey(Users, on_delete=models.CASCADE)
     recipe_id = models.ForeignKey(Recipe, on_delete=models.CASCADE)
 
+class ingredient_images(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    ingredient_image = models.ImageField(upload_to='images/')
+
 

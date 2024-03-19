@@ -1,0 +1,11 @@
+{% extends 'layouts/page.html' %}
+
+{% block content %}
+<title>Results</title>
+{%for n in items%}
+<ul>{{n}}</ul>
+{%endfor%}
+<a href="{% url 'images' %}">
+    <button type="button" class="delete-button">Back</button>
+</a>
+{% endblock %}
