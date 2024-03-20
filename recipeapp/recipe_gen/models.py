@@ -32,4 +32,8 @@ class ingredient_images(models.Model):
     id = models.BigAutoField(primary_key=True)
     ingredient_image = models.ImageField(upload_to='images/')
 
+class result_images(models.Model):
+    ingre_id = models.ForeignKey(ingredient_images, on_delete=models.CASCADE)
+    url = models.CharField(max_length=500)
+
 

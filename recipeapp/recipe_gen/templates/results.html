@@ -1,9 +1,16 @@
 {% extends 'layouts/page.html' %}
+{% load static %}
 
 {% block content %}
-<title>Results</title>
-{%for n in items%}
-<ul>{{n}}</ul>
+{% with path=path%}
+<img src="{% static path %}" style="width: 100%; height: 100%;"/>
+{% endwith %}
+{%for i, n in results%}
+    {% if n == 1 %}
+        <ul>There is {{n}}, {{i}}</ul>
+    {% else %}
+        <ul>There are {{n}}, {{i}}s</ul>
+    {% endif %}
 {%endfor%}
 <a href="{% url 'images' %}">
     <button type="button" class="delete-button">Back</button>

@@ -21,17 +21,21 @@ def index(request):
 
 def images(request):
     image = ingredient_images.objects.all()
-    for n in image:
-        print(n.ingredient_image)
-    context = { 'image': image}
+    context = { 
+        'image': image
+        }
     return render(request, 'image.html', context)
 
 def results(request, id):
     image = ingredient_images.objects.get(id=id)
     path = image.ingredient_image.url
-    items = OBJ_DET.detect(path)
+    items, file = OBJ_DET.detect(path, id)
+    results = numerated_results(items)
+    path = f"/output_images/{id}/{file}"
+    print(path)
     context = {
-        'items': items
+        'results':results,
+        'path': path,
     }
     
     return render(request, 'results.html', context)
@@ -44,3 +48,30 @@ def delete_image(request):
 
 def back(request):
     return redirect("/")
+
+def counter(word, list):
+    count = 0
+    for i in list:
+        if i==word:
+            count+=1
+        else:
+            pass
+    return count
+
+def listify(set):
+    list = []
+    for i in set:
+        list.append(i)
+    return list
+
+def numerated_results(list):
+    count_list = []
+    results = []
+    set_items = set(list)
+    unique_items= listify(set_items)
+    for item in set_items:
+        count_list.append(counter(item, list))
+    for i in range(0, len(set_items)):
+        result = [unique_items[i],count_list[i]]
+        results.append(result)
+    return results
