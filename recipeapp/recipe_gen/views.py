@@ -34,6 +34,12 @@ def results(request, id):
     results = numerated_results(items)
     path = f"/output_images/{id}/{file}"
     print(path)
+
+    for ing in results:
+        ingredients = Ingredients()
+        print(ing[0])
+        ingredients.ingredient_name = ing[0]
+        ingredients.save()
     context = {
         'results':results,
         'path': path,
@@ -42,10 +48,30 @@ def results(request, id):
     
     return render(request, 'results.html', context)
 
+def add_remove_ingredients(request):
+    ingredients = Ingredients.objects.all()
+    for i in ingredients:
+        print(i.ingredient_name)
+    form = IngredientForm
+    if request.method == 'POST':
+        form = IngredientForm(request.POST)
+        if form.is_valid():
+            form.save()
+    context = {
+        'form' : form,
+        'ingredients': ingredients
+    }
+    return render(request, 'add_remove_ing.html', context)
+
 def delete_image(request):
     images = ingredient_images.objects.all()
     images.delete()
     shutil.rmtree('./media/images')
+    return redirect("/")
+
+def del_back_ing(request):
+    ingredients = Ingredients.objects.all()
+    ingredients.delete()
     return redirect("/")
 
 def back(request):

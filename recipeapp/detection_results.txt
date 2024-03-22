@@ -1,4 +1,4 @@
-person
-sports ball
-snowboard
-skis
+car
+motorcycle
+bus
+stop sign

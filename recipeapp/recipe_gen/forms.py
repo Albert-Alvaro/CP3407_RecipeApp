@@ -8,8 +8,7 @@ class ImageForm(forms.ModelForm):
         model = ingredient_images
         fields = ['ingredient_image']
 
-class OutputForm(forms.ModelForm):
-    
+class IngredientForm(forms.ModelForm):
     class Meta:
-        model = result_images
-        fields = ['url']
+        model = Ingredients
+        fields = ["ingredient_name", "ingredient_type"]
