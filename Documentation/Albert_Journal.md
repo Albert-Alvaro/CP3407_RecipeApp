@@ -19,4 +19,4 @@ The next thing I did was to start with the LLM integration, I imported the code 
 
 Fixed another bug where the ingredients will duplicate because everytime it goes back one page it will load int he view of the page as well, causing duplicating ingredients as the page gets reloaded and the same ingredients gets inserted into the database again, and when the next button is hit the thing loads again, causing for there to be duplicated ingredients. Fixed the problem by adjusting and modfying how the pages flow from one another and making the back button in the ingredients page to also delete the output images as well.
 
-I will get started on actually integrating the LLM tomorrow.
+I integrated the LLM into the code, it works but the output of the LLM is not formatted, and is hard to read. Need to do more research into how to return the output of the LLM in a way that is similar to how chatGPT does it, line per line maybe?
