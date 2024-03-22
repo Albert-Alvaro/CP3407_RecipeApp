@@ -1,12 +1,4 @@
-bicycle
-bicycle
-bicycle
-bicycle
-bicycle
-bicycle
-bicycle
-bicycle
-bicycle
-bicycle
-bicycle
-bicycle
+person
+sports ball
+snowboard
+skis

@@ -10,7 +10,7 @@ class OBJ_DET:
         file.close()
         model = YOLO('yolo-weights/yolov8l.pt')
         array = cv2.imread('./'+img_path)
-        results = model(source=array, save=True, project=f"recipe_gen/static/output_images/", name=f"{id}")
+        results = model(source=array, save=True, project=f"recipe_gen/static/output_images/", name=f"{id}", conf=0.40)
         for r in results:
             boxes = r.boxes
             path = r.path

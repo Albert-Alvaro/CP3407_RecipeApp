@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from .forms import *
 from .yolo import *
 import shutil
+import json
 # Create your views here.
 
 def index(request):
@@ -36,6 +37,7 @@ def results(request, id):
     context = {
         'results':results,
         'path': path,
+        'id': id
     }
     
     return render(request, 'results.html', context)
@@ -48,6 +50,16 @@ def delete_image(request):
 
 def back(request):
     return redirect("/")
+
+def del_back(request, id):
+    path = get_keys("../recipeapp/sensitive.json")
+    key = path['path']   
+    shutil.rmtree(f"{key}")
+    return redirect("/images")
+
+def get_keys(path):
+    with open(path) as f:
+        return json.load(f)
 
 def counter(word, list):
     count = 0

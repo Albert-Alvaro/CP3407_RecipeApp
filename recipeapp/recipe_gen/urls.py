@@ -8,7 +8,8 @@ urlpatterns = [
     path('images',views.images, name = "images"),
     path('results/<int:id>', views.results, name='results'),
     path('delete-images',views.delete_image,name="delete-images"),
-    path('back', views.back, name='back')
+    path('back', views.back, name='back'),
+    path('del-back/<int:id>', views.del_back, name='del_back')
 ]
 
 if settings.DEBUG:
