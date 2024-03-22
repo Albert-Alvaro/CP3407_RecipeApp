@@ -10,3 +10,9 @@ The image detection algorithm used is YOLO, which is able to detect objects with
 
 ### 20/3/2024
 Today I had refined the output of the algorithm, the algorithm used to just output the individual objects inside of the image, now the objects are counted and shown to the user in a more easily read format, furthermore, the resulting image of the output of the model will be shown as well.
+
+### 23/3/2024
+
+Today, I improved upon the code further. Firstly I fixed some issues in regards to the displayed output image, the output image was being generated into specific directories based on the generated id of the image itself, hwoever the generated directory will not overwrite the previous directory if the user were to analyze the same image twice, meaning the user will only be shown the previous output image instead of the new one, solution for this was to rely on the hope that the user will make use of the web apps navigation flow and click the back button if they want to return to the images page, the back button will delete all of the outputted directories, ensuring that even if the same image is analyzed repeatedly the output image will be the most recent outputted image. Next is the cleaning of the database models, there were remnants of past attempts for trying to sotre the outputted image within the database, but it is unnecessary and was never put inot use, thus although it was not affecting anything, it was better to remvoe it and renew the migrations. 
+
+The next thing I did was to start with the LLM integration, I imported the code from the LLM branch and have only made it into a class for easy importing, I have not implemented it yet today. However I have made it so that after the image of the user has been scanned they can click a button to the next page where they can see a list of the ingredients which they have and the option to also manually add upon what has been detected. I will get started on actually integrating the LLM tomorrow.
