@@ -4,6 +4,7 @@ from .forms import *
 from .yolo import *
 import shutil
 import json
+from .llm import LLM
 # Create your views here.
 
 def index(request):
@@ -63,6 +64,18 @@ def add_remove_ingredients(request, id):
         'id': id
     }
     return render(request, 'add_remove_ing.html', context)
+
+def llm_results(request):
+    ingredients = Ingredients.objects.all()
+    ings = []
+    for i in ingredients:
+        ings.append(i.ingredient_name)
+    recipe = LLM.generate_recipe(ings)
+    print(recipe)
+    context = {
+        'recipe': recipe
+    }
+    return render(request, 'llm_result.html', context)
 
 def delete_image(request):
     images = ingredient_images.objects.all()

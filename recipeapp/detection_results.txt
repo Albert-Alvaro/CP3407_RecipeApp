@@ -1,4 +1,17 @@
-car
-motorcycle
-bus
-stop sign
+banana
+banana
+orange
+carrot
+apple
+orange
+orange
+apple
+broccoli
+broccoli
+apple
+orange
+apple
+orange
+banana
+orange
+broccoli

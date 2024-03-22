@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block content %}
-<p>Currently Possessed Ingredients</p>
+<h2>Currently Possessed Ingredients</h2>
 {%for n in ingredients%}
     <ol>{{n.ingredient_name}}</ol>
 {% endfor %}
@@ -11,6 +11,9 @@
     {{form.as_p}}
     <button type="submit" class="btn btn-primary btn-sm" value=""> Save</button>
 </form>
+<a href="{% url 'llm_result'%}">
+    <button type="button" class="delete-button">Next</button>
+</a>
 <a href="{% url 'del_back_ing'%}">
     <button type="button" class="delete-button">Back</button>
 </a>
