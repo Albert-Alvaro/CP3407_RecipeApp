@@ -10,7 +10,7 @@ urlpatterns = [
     path('delete-images',views.delete_image,name="delete-images"),
     path('back', views.back, name='back'),
     path('del-back/<int:id>', views.del_back, name='del_back'),
-    path('add_remove_ing', views.add_remove_ingredients, name='add_remove_ing'),
+    path('add_remove_ing/<int:id>', views.add_remove_ingredients, name='add_remove_ing'),
     path('del-back-ing', views.del_back_ing, name="del_back_ing")
 ]
 

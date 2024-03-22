@@ -48,7 +48,7 @@ def results(request, id):
     
     return render(request, 'results.html', context)
 
-def add_remove_ingredients(request):
+def add_remove_ingredients(request, id):
     ingredients = Ingredients.objects.all()
     for i in ingredients:
         print(i.ingredient_name)
@@ -59,7 +59,8 @@ def add_remove_ingredients(request):
             form.save()
     context = {
         'form' : form,
-        'ingredients': ingredients
+        'ingredients': ingredients,
+        'id': id
     }
     return render(request, 'add_remove_ing.html', context)
 
@@ -70,9 +71,12 @@ def delete_image(request):
     return redirect("/")
 
 def del_back_ing(request):
+    path = get_keys("../recipeapp/sensitive.json")
+    key = path['path']   
+    shutil.rmtree(f"{key}")
     ingredients = Ingredients.objects.all()
     ingredients.delete()
-    return redirect("/")
+    return redirect(f"/images")
 
 def back(request):
     return redirect("/")
