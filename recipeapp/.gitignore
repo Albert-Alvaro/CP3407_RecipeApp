@@ -6,6 +6,6 @@ __pycache__
 share
 db.sqlite3
 yolo-weights
-static/output_images
+./static/output_images
 sensitive.json
 migrations

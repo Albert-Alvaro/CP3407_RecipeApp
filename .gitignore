@@ -6,3 +6,4 @@ __pycache__
 share
 db.sqlite3
 yolo-weights
+recipeapp/recipe_gen/static/output_images/
