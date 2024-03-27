@@ -11,9 +11,8 @@ class Recipe(models.Model):
 
 class Ingredients(models.Model):
     ingredient_id = models.BigAutoField(primary_key=True)
-    ingredient_name = models.CharField(max_length=60, null=False)
-    ingredient_type = models.CharField(max_length=60, null=False)
-    recipe_id = models.ForeignKey(Recipe, on_delete=models.CASCADE)
+    ingredient_name = models.CharField(max_length=60, null=True)
+    ingredient_type = models.CharField(max_length=60, null=True)
 
 class Users(models.Model):
     user_id = models.BigAutoField(primary_key=True)
@@ -27,5 +26,9 @@ class Prompts(models.Model):
 class Recipe_History(models.Model):
     user_id = models.ForeignKey(Users, on_delete=models.CASCADE)
     recipe_id = models.ForeignKey(Recipe, on_delete=models.CASCADE)
+
+class ingredient_images(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    ingredient_image = models.ImageField(upload_to='images/')
 
 

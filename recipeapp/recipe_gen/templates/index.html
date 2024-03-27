@@ -1,0 +1,14 @@
+{% extends 'layouts/page.html' %}
+
+{% block content %}
+<title>Upload Image of Ingredients</title>
+<form method = "post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Upload</button>
+</form>
+
+<a href="{% url 'images'%}">
+    <button type="button">Images</button>
+</a>
+{% endblock %}

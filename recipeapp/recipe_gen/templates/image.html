@@ -1,0 +1,18 @@
+{% extends 'layouts/page.html' %}
+
+{% block content %}
+<title>Images</title>
+<a href="{% url 'back' %}">
+    <button type="button" class="delete-button">Back</button>
+</a>
+
+{%for n in image%}
+<a href="{%url 'results' n.id %}">
+    <img src="{{n.ingredient_image.url}}" style="width: 40%; height: 40%">
+</a>
+{% endfor %}
+
+<a href="{% url 'delete-images' %}">
+    <button type="button" class="delete-button">Delete</button>
+</a>
+{% endblock %}
