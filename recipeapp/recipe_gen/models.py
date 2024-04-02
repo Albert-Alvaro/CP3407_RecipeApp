@@ -11,7 +11,7 @@ class Recipe(models.Model):
 
 class Ingredients(models.Model):
     ingredient_id = models.BigAutoField(primary_key=True)
-    ingredient_name = models.CharField(max_length=60, null=True)
+    ingredient_name = models.CharField(max_length=60, null=True, blank=True)
     ingredient_type = models.CharField(max_length=60, null=True)
 
 class Users(models.Model):

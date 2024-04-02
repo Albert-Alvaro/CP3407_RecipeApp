@@ -10,21 +10,35 @@ from .llm import LLM
 def index(request):
     if request.method == 'POST':
         form = ImageForm(request.POST, request.FILES)
- 
         if form.is_valid():
             form.save()
             return redirect("/")
     else:
         form = ImageForm()
+    if request.method == 'POST':
+        form2 = IngredientForm(request.POST)
+        if form2.is_valid():
+            ingredient = form2.save(commit=False)
+            ingredient.save()
+    else:
+        form2 = IngredientForm()
+    ingredients = Ingredients.objects.all()
     context = {
-        'form': form
+        'form': form,
+        'form2':form2,
+        'ingredients':ingredients
     }
     return render(request, 'index.html', context)
 
 def images(request):
     image = ingredient_images.objects.all()
+    urls = []
+    for i in image:
+        print(i.ingredient_image.url)
+        urls.append([i.id, i.ingredient_image.url])
     context = { 
-        'image': image
+        'image': image,
+        'urls': urls
         }
     return render(request, 'image.html', context)
 
