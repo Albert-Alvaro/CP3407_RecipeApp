@@ -50,14 +50,16 @@ def results(request, id):
     return render(request, 'results.html', context)
 
 def add_remove_ingredients(request, id):
-    ingredients = Ingredients.objects.all()
-    for i in ingredients:
-        print(i.ingredient_name)
-    form = IngredientForm
     if request.method == 'POST':
         form = IngredientForm(request.POST)
         if form.is_valid():
-            form.save()
+            ingredient = form.save(commit=False)
+            ingredient.save()
+    else:
+        form = IngredientForm
+    ingredients = Ingredients.objects.all()
+    for i in ingredients:
+        print(i.ingredient_name)
     context = {
         'form' : form,
         'ingredients': ingredients,

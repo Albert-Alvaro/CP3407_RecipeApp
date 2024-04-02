@@ -11,4 +11,4 @@ class ImageForm(forms.ModelForm):
 class IngredientForm(forms.ModelForm):
     class Meta:
         model = Ingredients
-        fields = ["ingredient_name", "ingredient_type"]
+        fields = ["ingredient_name"]
