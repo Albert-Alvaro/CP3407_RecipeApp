@@ -8,10 +8,11 @@ class OBJ_DET:
         file = open("detection_results.txt", "w")
         file.write("")
         file.close()
-        model = YOLO('yolo-weights/yolov8l.pt')
+        model = YOLO('yolo-weights/best.pt')
         array = cv2.imread('./'+img_path)
-        results = model(source=array, save=True, project=f"recipe_gen/static/output_images/", name=f"{id}", conf=0.40)
+        results = model(source=array, save=True, project=f"recipe_gen/static/output_images/", name=f"{id}")
         for r in results:
+            print(r)
             boxes = r.boxes
             path = r.path
             for box in boxes:

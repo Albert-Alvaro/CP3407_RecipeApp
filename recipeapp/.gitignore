@@ -9,3 +9,4 @@ yolo-weights
 ./static/output_images
 sensitive.json
 migrations
+media/images

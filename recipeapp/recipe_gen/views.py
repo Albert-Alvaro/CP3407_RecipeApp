@@ -84,20 +84,36 @@ def delete_image(request):
     return redirect("/")
 
 def del_back_ing(request):
-    path = get_keys("../recipeapp/sensitive.json")
-    key = path['path']   
-    shutil.rmtree(f"{key}")
+    if os.path.isdir('../recipeapp/sensitive.json'):
+        path = get_keys("../recipeapp/sensitive.json")
+        key = path['path']   
+        shutil.rmtree(f"{key}")
+    else:
+        pass
     ingredients = Ingredients.objects.all()
     ingredients.delete()
     return redirect(f"/images")
 
 def back(request):
+    if os.path.isdir('../recipeapp/sensitive.json'):
+        path = get_keys("../recipeapp/sensitive.json")
+        key = path['path']   
+        shutil.rmtree(f"{key}")
+    else:
+        pass
+    ingredients = Ingredients.objects.all()
+    ingredients.delete()
     return redirect("/")
 
 def del_back(request, id):
-    path = get_keys("../recipeapp/sensitive.json")
-    key = path['path']   
-    shutil.rmtree(f"{key}")
+    if os.path.isdir('../recipeapp/sensitive.json'):
+        path = get_keys("../recipeapp/sensitive.json")
+        key = path['path']   
+        shutil.rmtree(f"{key}")
+    else:
+        pass
+    ingredients = Ingredients.objects.all()
+    ingredients.delete()
     return redirect("/images")
 
 def get_keys(path):
