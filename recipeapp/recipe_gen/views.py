@@ -5,6 +5,7 @@ from .yolo import *
 import shutil
 import json
 from .llm import LLM
+from django.template.defaultfilters import linebreaks
 # Create your views here.
 
 """Object Detection Views"""
@@ -89,11 +90,13 @@ def llm_results(request):
     for i in ingredients:
         ings.append(i.ingredient_name)
     recipe = LLM.generate_recipe(ings)
+    formatted_recipe = linebreaks(recipe)
+    print(formatted_recipe)
     saved_rec = Recipe()
-    saved_rec.recipe_content = recipe
+    saved_rec.recipe_content = formatted_recipe
     saved_rec.save()
     context = {
-        'recipe': recipe,
+        'recipe': formatted_recipe,
         'saved_rec': saved_rec
     }
     return render(request, 'llm_result.html', context)
@@ -107,7 +110,6 @@ def bool_change(request, id):
 def saved_recipes(request):
     recipes = Recipe.objects.all()
     for r in recipes:
-        print(r)
         if r.is_saved == False:
             r.delete()
     saved_recs = Recipe.objects.all()
@@ -115,6 +117,21 @@ def saved_recipes(request):
         'saved_recs' : saved_recs
     }
     return render(request, 'saved_recipes.html', context)
+
+def recipe_page(request, id):
+    recipe = Recipe.objects.get(recipe_id=id)
+    if request.method == 'POST':
+        form = MetricForm(request.POST, instance=recipe)
+        if form.is_valid():
+            metric = form.save(commit=False)
+            metric.save()
+    else:
+        form = MetricForm()
+    context = {
+        'recipe': recipe,
+        'form' : form,
+    }
+    return render(request, 'recipe.html', context)
 
 """LLM and recipe stuff ends here"""
 

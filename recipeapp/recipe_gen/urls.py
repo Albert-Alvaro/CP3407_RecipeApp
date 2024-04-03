@@ -15,7 +15,8 @@ urlpatterns = [
     path('llm-result', views.llm_results, name='llm_result'),
     path('saved_recipes', views.saved_recipes, name='saved_recipes'),
     path('bool-change/<int:id>', views.bool_change, name='bool-change'),
-    path('del-saved-rec/<int:id>', views.delete_saved_recipe, name='del-saved-rec')
+    path('del-saved-rec/<int:id>', views.delete_saved_recipe, name='del-saved-rec'),
+    path('recipe_page/<int:id>', views.recipe_page, name='recipe_page'), 
 ]
 
 if settings.DEBUG:

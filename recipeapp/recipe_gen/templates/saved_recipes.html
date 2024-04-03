@@ -5,10 +5,15 @@
 
 
 {% for recipe in saved_recs %}
+{% autoescape off %}
 <ul>{{recipe.recipe_content}}</ul>
+{% endautoescape %}
 {% if recipe.recipe_id != None %}
 <a href="{% url 'del-saved-rec' recipe.recipe_id %}">
     <button type="button" class="delete-button">Delete</button>
+</a>
+<a href="{% url 'recipe_page' recipe.recipe_id %}">
+    <button type="button" class="delete-button">More</button>
 </a>
 {% endif %}
 {% endfor %}

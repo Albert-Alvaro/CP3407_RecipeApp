@@ -18,3 +18,9 @@ class RecipeForm(forms.ModelForm):
     class Meta:
         model = Recipe
         fields = ["is_saved"]
+
+class MetricForm(forms.ModelForm):
+
+    class Meta:
+        model = Recipe
+        fields = ['recipe_rating', 'recipe_review']
