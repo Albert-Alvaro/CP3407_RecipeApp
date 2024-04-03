@@ -1,0 +1,26 @@
+{% extends 'layouts/page.html' %}
+
+{% block content %}
+<h2>Upload Image of Ingredients</h2>
+<form method = "post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" name="image" class="delete-button">Upload</button>
+</form>
+
+<h2>Manually Add Ingredients</h2>
+<h4>Ingredients Currently in Possession</h4>
+{%for n in ingredients%}
+    <ol>{{n.ingredient_name}}</ol>
+{% endfor %}
+<form method='POST'>
+    {% csrf_token %}
+    {{form2.as_p}}
+    <button type="submit" name="manual" class="delete-button" value=""> Add</button>
+</form>
+
+<a href="{% url 'images'%}">
+    <button type="button" class="delete-button">Next</button>
+</a>
+
+{% endblock %}
