@@ -10,6 +10,9 @@
 <a href="{% url 'del-saved-rec' recipe.recipe_id %}">
     <button type="button" class="delete-button">Delete</button>
 </a>
+<a href="{% url 'recipe_page' recipe.recipe_id %}">
+    <button type="button" class="delete-button">More</button>
+</a>
 {% endif %}
 {% endfor %}
 

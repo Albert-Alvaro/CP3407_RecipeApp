@@ -107,7 +107,6 @@ def bool_change(request, id):
 def saved_recipes(request):
     recipes = Recipe.objects.all()
     for r in recipes:
-        print(r)
         if r.is_saved == False:
             r.delete()
     saved_recs = Recipe.objects.all()
@@ -115,6 +114,21 @@ def saved_recipes(request):
         'saved_recs' : saved_recs
     }
     return render(request, 'saved_recipes.html', context)
+
+def recipe_page(request, id):
+    recipe = Recipe.objects.get(recipe_id=id)
+    if request.method == 'POST':
+        form = MetricForm(request.POST, instance=recipe)
+        if form.is_valid():
+            metric = form.save(commit=False)
+            metric.save()
+    else:
+        form = MetricForm()
+    context = {
+        'recipe': recipe,
+        'form' : form,
+    }
+    return render(request, 'recipe.html', context)
 
 """LLM and recipe stuff ends here"""
 
