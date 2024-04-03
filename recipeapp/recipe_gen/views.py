@@ -7,6 +7,8 @@ import json
 from .llm import LLM
 # Create your views here.
 
+"""Object Detection Views"""
+
 def index(request):
     if request.method == 'POST' and "image" in request.POST:
         form = ImageForm(request.POST, request.FILES)
@@ -34,7 +36,6 @@ def images(request):
     image = ingredient_images.objects.all()
     urls = []
     for i in image:
-        print(i.ingredient_image.url)
         urls.append([i.id, i.ingredient_image.url])
     context = { 
         'image': image,
@@ -48,11 +49,9 @@ def results(request, id):
     items, file = OBJ_DET.detect(path, id)
     results = numerated_results(items)
     path = f"/output_images/{id}/{file}"
-    print(path)
 
     for ing in results:
         ingredients = Ingredients()
-        print(ing[0])
         ingredients.ingredient_name = ing[0]
         ingredients.save()
     context = {
@@ -72,8 +71,6 @@ def add_remove_ingredients(request, id):
     else:
         form = IngredientForm
     ingredients = Ingredients.objects.all()
-    for i in ingredients:
-        print(i.ingredient_name)
     context = {
         'form' : form,
         'ingredients': ingredients,
@@ -81,14 +78,12 @@ def add_remove_ingredients(request, id):
     }
     return render(request, 'add_remove_ing.html', context)
 
+"""End of object detection views"""
+
+
+"""From here this deals with recipe saving and stuff related to the LLM"""
+
 def llm_results(request):
-    if request.method == 'POST':
-        form = RecipeForm(request.POST)
-        if form.is_valid():
-            rec = form.save(commit=False)
-            rec.save()
-    else:
-        form = RecipeForm()
     ingredients = Ingredients.objects.all()
     ings = []
     for i in ingredients:
@@ -99,28 +94,42 @@ def llm_results(request):
     saved_rec.save()
     context = {
         'recipe': recipe,
-        'form' : form
+        'saved_rec': saved_rec
     }
     return render(request, 'llm_result.html', context)
 
+def bool_change(request, id):
+    recipe = Recipe.objects.get(recipe_id=id)
+    recipe.is_saved = True
+    recipe.save()
+    return redirect('/back')
+
 def saved_recipes(request):
     recipes = Recipe.objects.all()
-    saved = []
-    for recipe in recipes:
-        if recipe.is_saved:
-            saved.append(recipe)
-        else:
-            pass
+    for r in recipes:
+        print(r)
+        if r.is_saved == False:
+            r.delete()
+    saved_recs = Recipe.objects.all()
     context = {
-        'saved' : saved
+        'saved_recs' : saved_recs
     }
     return render(request, 'saved_recipes.html', context)
+
+"""LLM and recipe stuff ends here"""
+
+"""Back and delete functions for general navigation"""
 
 def delete_image(request, id):
     images = ingredient_images.objects.get(id=id)
     os.remove(f".{images.ingredient_image.url}")
     images.delete()
     return redirect("/")
+
+def delete_saved_recipe(request, id):
+    recipe = Recipe.objects.get(recipe_id=id)
+    recipe.delete()
+    return redirect('/saved_recipes')
 
 def del_back_ing(request):
     if os.path.isdir('../recipeapp/sensitive.json'):
@@ -144,8 +153,8 @@ def back(request):
     ingredients.delete()
     recipe = Recipe.objects.all()
     for r in recipe:
-        if r.is_saved:
-            pass
+        if r.is_saved == True:
+            continue
         else:
             r.delete()
     return redirect("/")
@@ -160,6 +169,10 @@ def del_back(request, id):
     ingredients = Ingredients.objects.all()
     ingredients.delete()
     return redirect("/images")
+
+"""End of back and delete functions"""
+
+"""Start of Miscalleneous functions"""
 
 def get_keys(path):
     with open(path) as f:
@@ -191,3 +204,5 @@ def numerated_results(list):
         result = [unique_items[i],count_list[i]]
         results.append(result)
     return results
+
+"""End of Miscalleneous functions"""

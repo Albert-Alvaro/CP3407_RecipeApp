@@ -4,8 +4,13 @@
 {% block content %}
 
 
-{% for recipe in saved %}
+{% for recipe in saved_recs %}
 <ul>{{recipe.recipe_content}}</ul>
+{% if recipe.recipe_id != None %}
+<a href="{% url 'del-saved-rec' recipe.recipe_id %}">
+    <button type="button" class="delete-button">Delete</button>
+</a>
+{% endif %}
 {% endfor %}
 
 {% endblock %}

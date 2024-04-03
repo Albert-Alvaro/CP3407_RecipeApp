@@ -8,9 +8,9 @@
     <button type="button" class="delete-button">Back</button>
 </a>
 
-<form method = "post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" name="recipe" class="delete-button">Save Recipe</button>
-</form>
+<a href="{% url 'bool-change' saved_rec.recipe_id %}">
+    <button type="button" class="delete-button">Save</button>
+</a>
+
+
 {% endblock %}

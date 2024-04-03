@@ -13,7 +13,9 @@ urlpatterns = [
     path('add_remove_ing/<int:id>', views.add_remove_ingredients, name='add_remove_ing'),
     path('del-back-ing', views.del_back_ing, name="del_back_ing"),
     path('llm-result', views.llm_results, name='llm_result'),
-    path('saved_recipes', views.saved_recipes, name='saved_recipes')
+    path('saved_recipes', views.saved_recipes, name='saved_recipes'),
+    path('bool-change/<int:id>', views.bool_change, name='bool-change'),
+    path('del-saved-rec/<int:id>', views.delete_saved_recipe, name='del-saved-rec')
 ]
 
 if settings.DEBUG:

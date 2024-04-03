@@ -4,9 +4,9 @@ from django.db import models
 
 class Recipe(models.Model):
     recipe_id = models.BigAutoField(primary_key=True)
-    recipe_content = models.CharField(max_length=5000)
-    recipe_steps = models.CharField(max_length=4000)
-    recipe_rating = models.IntegerField()
+    recipe_content = models.TextField(null=True)
+    recipe_steps = models.CharField(max_length=40000)
+    recipe_rating = models.IntegerField(null=True)
     recipe_category = models.CharField(max_length=45)
     is_saved = models.BooleanField(default=False)
 
