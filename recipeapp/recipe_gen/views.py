@@ -8,14 +8,14 @@ from .llm import LLM
 # Create your views here.
 
 def index(request):
-    if request.method == 'POST':
+    if request.method == 'POST' and "image" in request.POST:
         form = ImageForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             return redirect("/")
     else:
         form = ImageForm()
-    if request.method == 'POST':
+    if request.method == 'POST' and "manual" in request.POST:
         form2 = IngredientForm(request.POST)
         if form2.is_valid():
             ingredient = form2.save(commit=False)
@@ -82,21 +82,44 @@ def add_remove_ingredients(request, id):
     return render(request, 'add_remove_ing.html', context)
 
 def llm_results(request):
+    if request.method == 'POST':
+        form = RecipeForm(request.POST)
+        if form.is_valid():
+            rec = form.save(commit=False)
+            rec.save()
+    else:
+        form = RecipeForm()
     ingredients = Ingredients.objects.all()
     ings = []
     for i in ingredients:
         ings.append(i.ingredient_name)
     recipe = LLM.generate_recipe(ings)
-    print(recipe)
+    saved_rec = Recipe()
+    saved_rec.recipe_content = recipe
+    saved_rec.save()
     context = {
-        'recipe': recipe
+        'recipe': recipe,
+        'form' : form
     }
     return render(request, 'llm_result.html', context)
 
-def delete_image(request):
-    images = ingredient_images.objects.all()
+def saved_recipes(request):
+    recipes = Recipe.objects.all()
+    saved = []
+    for recipe in recipes:
+        if recipe.is_saved:
+            saved.append(recipe)
+        else:
+            pass
+    context = {
+        'saved' : saved
+    }
+    return render(request, 'saved_recipes.html', context)
+
+def delete_image(request, id):
+    images = ingredient_images.objects.get(id=id)
+    os.remove(f".{images.ingredient_image.url}")
     images.delete()
-    shutil.rmtree('./media/images')
     return redirect("/")
 
 def del_back_ing(request):
@@ -119,6 +142,12 @@ def back(request):
         pass
     ingredients = Ingredients.objects.all()
     ingredients.delete()
+    recipe = Recipe.objects.all()
+    for r in recipe:
+        if r.is_saved:
+            pass
+        else:
+            r.delete()
     return redirect("/")
 
 def del_back(request, id):

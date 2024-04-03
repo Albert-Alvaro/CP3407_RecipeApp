@@ -5,7 +5,7 @@
 <form method = "post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">Upload</button>
+    <button type="submit" name="image" class="delete-button">Upload</button>
 </form>
 
 <h2>Manually Add Ingredients</h2>
@@ -16,7 +16,7 @@
 <form method='POST'>
     {% csrf_token %}
     {{form2.as_p}}
-    <button type="submit" class="btn btn-primary btn-sm" value=""> Save</button>
+    <button type="submit" name="manual" class="delete-button" value=""> Add</button>
 </form>
 
 <a href="{% url 'images'%}">

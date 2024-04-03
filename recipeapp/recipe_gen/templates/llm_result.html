@@ -7,4 +7,10 @@
 <a href="{% url 'del_back_ing' %}">
     <button type="button" class="delete-button">Back</button>
 </a>
+
+<form method = "post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" name="recipe" class="delete-button">Save Recipe</button>
+</form>
 {% endblock %}

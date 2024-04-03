@@ -1,0 +1,11 @@
+{% extends 'layouts/page.html' %}
+{% load static %}
+
+{% block content %}
+
+
+{% for recipe in saved %}
+<ul>{{recipe.recipe_content}}</ul>
+{% endfor %}
+
+{% endblock %}

@@ -4,14 +4,15 @@ from django.db import models
 
 class Recipe(models.Model):
     recipe_id = models.BigAutoField(primary_key=True)
-    recipe_content = models.CharField(max_length=5000, null=False)
-    recipe_steps = models.CharField(max_length=4000, null=False)
+    recipe_content = models.CharField(max_length=5000)
+    recipe_steps = models.CharField(max_length=4000)
     recipe_rating = models.IntegerField()
-    recipe_category = models.CharField(max_length=45, null=False)
+    recipe_category = models.CharField(max_length=45)
+    is_saved = models.BooleanField(default=False)
 
 class Ingredients(models.Model):
     ingredient_id = models.BigAutoField(primary_key=True)
-    ingredient_name = models.CharField(max_length=60, null=True, blank=True)
+    ingredient_name = models.CharField(max_length=60, null=True)
     ingredient_type = models.CharField(max_length=60, null=True)
 
 class Users(models.Model):

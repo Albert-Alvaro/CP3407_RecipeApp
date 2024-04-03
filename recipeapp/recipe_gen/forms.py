@@ -12,3 +12,9 @@ class IngredientForm(forms.ModelForm):
     class Meta:
         model = Ingredients
         fields = ["ingredient_name"]
+
+class RecipeForm(forms.ModelForm):
+
+    class Meta:
+        model = Recipe
+        fields = ["is_saved"]
