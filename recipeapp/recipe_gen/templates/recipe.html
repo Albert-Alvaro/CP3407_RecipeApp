@@ -3,7 +3,9 @@
 
 {% block content %}
 
+{% autoescape off %}
 {{recipe.recipe_content}}
+{% endautoescape %}
 
 <h5>Rate and Review the Recipe</h5>
 <form method='POST'>

@@ -5,6 +5,7 @@ from .yolo import *
 import shutil
 import json
 from .llm import LLM
+from django.template.defaultfilters import linebreaks
 # Create your views here.
 
 """Object Detection Views"""
@@ -89,11 +90,13 @@ def llm_results(request):
     for i in ingredients:
         ings.append(i.ingredient_name)
     recipe = LLM.generate_recipe(ings)
+    formatted_recipe = linebreaks(recipe)
+    print(formatted_recipe)
     saved_rec = Recipe()
-    saved_rec.recipe_content = recipe
+    saved_rec.recipe_content = formatted_recipe
     saved_rec.save()
     context = {
-        'recipe': recipe,
+        'recipe': formatted_recipe,
         'saved_rec': saved_rec
     }
     return render(request, 'llm_result.html', context)
