@@ -5,7 +5,7 @@ from .yolo import *
 import shutil
 import json
 from .llm import LLM
-from django.template.defaultfilters import linebreaks
+from django.template.defaultfilters import linebreaksbr
 # Create your views here.
 
 """Object Detection Views"""
@@ -50,6 +50,7 @@ def results(request, id):
     items, file = OBJ_DET.detect(path, id)
     results = numerated_results(items)
     path = f"/output_images/{id}/{file}"
+    print(path)
 
     for ing in results:
         ingredients = Ingredients()
@@ -90,7 +91,7 @@ def llm_results(request):
     for i in ingredients:
         ings.append(i.ingredient_name)
     recipe = LLM.generate_recipe(ings)
-    formatted_recipe = linebreaks(recipe)
+    formatted_recipe = linebreaksbr(recipe)
     print(formatted_recipe)
     saved_rec = Recipe()
     saved_rec.recipe_content = formatted_recipe
@@ -149,9 +150,9 @@ def delete_saved_recipe(request, id):
     return redirect('/saved_recipes')
 
 def del_back_ing(request):
-    if os.path.isdir('../recipeapp/sensitive.json'):
-        path = get_keys("../recipeapp/sensitive.json")
-        key = path['path']   
+    path = get_keys("../recipeapp/sensitive.json")
+    key = path['path']
+    if os.path.isdir(key):  
         shutil.rmtree(f"{key}")
     else:
         pass
@@ -160,9 +161,9 @@ def del_back_ing(request):
     return redirect(f"/images")
 
 def back(request):
-    if os.path.isdir('../recipeapp/sensitive.json'):
-        path = get_keys("../recipeapp/sensitive.json")
-        key = path['path']   
+    path = get_keys("../recipeapp/sensitive.json")
+    key = path['path']
+    if os.path.isdir(key):  
         shutil.rmtree(f"{key}")
     else:
         pass
@@ -177,9 +178,9 @@ def back(request):
     return redirect("/")
 
 def del_back(request, id):
-    if os.path.isdir('../recipeapp/sensitive.json'):
-        path = get_keys("../recipeapp/sensitive.json")
-        key = path['path']   
+    path = get_keys("../recipeapp/sensitive.json")
+    key = path['path']
+    if os.path.isdir(key):  
         shutil.rmtree(f"{key}")
     else:
         pass
