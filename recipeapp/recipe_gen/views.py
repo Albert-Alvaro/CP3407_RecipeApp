@@ -11,6 +11,9 @@ from django.template.defaultfilters import linebreaksbr
 """Object Detection Views"""
 
 def index(request, id):
+    """View function that will display the homepage of the web application. It will generate the forms for user to upload images, and to manually ad ingredients"""
+
+    # Form for image uploads
     if request.method == 'POST' and "image" in request.POST:
         form = ImageForm(request.POST, request.FILES)
         if form.is_valid():
@@ -18,6 +21,8 @@ def index(request, id):
             return redirect(f"/index/"+str(id))
     else:
         form = ImageForm()
+
+    # Form for manually adding ingredients
     if request.method == 'POST' and "manual" in request.POST:
         form2 = IngredientForm(request.POST)
         if form2.is_valid():
@@ -25,6 +30,7 @@ def index(request, id):
             ingredient.save()
     else:
         form2 = IngredientForm()
+
     ingredients = Ingredients.objects.all()
     context = {
         'id': id,
@@ -35,8 +41,11 @@ def index(request, id):
     return render(request, 'index.html', context)
 
 def images(request, id):
+    """View function for the page where user can choose which image to analyze from the images he has uploaded"""
     image = ingredient_images.objects.all()
     urls = []
+
+    # Loop will unpackage image into lists within a list, for easier unpacking with django in the template
     for i in image:
         urls.append([i.id, i.ingredient_image.url])
     context = { 
@@ -83,9 +92,6 @@ def add_remove_ingredients(request, id, id2):
         'id': id
     }
     return render(request, 'add_remove_ing.html', context)
-
-def navbar(id):
-    return {'id':id}
 
 """End of object detection views"""
 
@@ -191,14 +197,14 @@ def delete_image(request, id):
     images = ingredient_images.objects.get(id=id)
     os.remove(f".{images.ingredient_image.url}")
     images.delete()
-    return redirect("/index")
+    return redirect(f"/index/"+str(id))
 
 def delete_saved_recipe(request, id):
     recipe = Recipe.objects.get(recipe_id=id)
     recipe.delete()
     return redirect('/saved_recipes')
 
-def del_back_ing(request):
+def del_back_ing(request, id):
     path = get_keys("../recipeapp/sensitive.json")
     key = path['path']
     if os.path.isdir(key):  
@@ -207,7 +213,7 @@ def del_back_ing(request):
         pass
     ingredients = Ingredients.objects.all()
     ingredients.delete()
-    return redirect(f"/images")
+    return redirect(f"/images/"+str(id))
 
 def back(request, id):
     path = get_keys("../recipeapp/sensitive.json")
@@ -235,7 +241,7 @@ def del_back(request, id):
         pass
     ingredients = Ingredients.objects.all()
     ingredients.delete()
-    return redirect("/images")
+    return redirect(f"/images/"+str(id))
 
 """End of back and delete functions"""
 
