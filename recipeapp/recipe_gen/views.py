@@ -10,12 +10,12 @@ from django.template.defaultfilters import linebreaksbr
 
 """Object Detection Views"""
 
-def index(request):
+def index(request, id):
     if request.method == 'POST' and "image" in request.POST:
         form = ImageForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return redirect("/")
+            return redirect(f"/index/"+str(id))
     else:
         form = ImageForm()
     if request.method == 'POST' and "manual" in request.POST:
@@ -27,24 +27,26 @@ def index(request):
         form2 = IngredientForm()
     ingredients = Ingredients.objects.all()
     context = {
+        'id': id,
         'form': form,
         'form2':form2,
         'ingredients':ingredients
     }
     return render(request, 'index.html', context)
 
-def images(request):
+def images(request, id):
     image = ingredient_images.objects.all()
     urls = []
     for i in image:
         urls.append([i.id, i.ingredient_image.url])
     context = { 
+        'id':id,
         'image': image,
         'urls': urls
         }
     return render(request, 'image.html', context)
 
-def results(request, id):
+def results(request, id, id2):
     image = ingredient_images.objects.get(id=id)
     path = image.ingredient_image.url
     items, file = OBJ_DET.detect(path, id)
@@ -57,6 +59,7 @@ def results(request, id):
         ingredients.ingredient_name = ing[0]
         ingredients.save()
     context = {
+        'id2':id2,
         'results':results,
         'path': path,
         'id': id
@@ -64,7 +67,7 @@ def results(request, id):
     
     return render(request, 'results.html', context)
 
-def add_remove_ingredients(request, id):
+def add_remove_ingredients(request, id, id2):
     if request.method == 'POST':
         form = IngredientForm(request.POST)
         if form.is_valid():
@@ -74,24 +77,30 @@ def add_remove_ingredients(request, id):
         form = IngredientForm
     ingredients = Ingredients.objects.all()
     context = {
+        'id2':id2,
         'form' : form,
         'ingredients': ingredients,
         'id': id
     }
     return render(request, 'add_remove_ing.html', context)
 
+def navbar(id):
+    return {'id':id}
+
 """End of object detection views"""
 
 
 """From here this deals with recipe saving and stuff related to the LLM"""
 
-def llm_results(request):
+def llm_results(request, id):
     ingredients = Ingredients.objects.all()
+    print(id)
     ings = []
     for i in ingredients:
         ings.append(i.ingredient_name)
-    recipe = LLM.generate_recipe(ings)
-    formatted_recipe = linebreaksbr(recipe)
+    # recipe = LLM.generate_recipe(ings)
+    # formatted_recipe = linebreaksbr(recipe)
+    formatted_recipe = "test"
     print(formatted_recipe)
     saved_rec = Recipe()
     saved_rec.recipe_content = formatted_recipe
@@ -145,7 +154,7 @@ def registration(request):
             register = form.save(commit=False)
             print(register)
             register.save()
-            return redirect('/login')
+            return redirect('/')
     else:
         form=RegisterForm()
     context = {
@@ -166,7 +175,7 @@ def login(request):
         for user in user_data:
             print(user.username, user.password)
             if user.username == username and user.password == password:
-                return redirect('/back')
+                return redirect(f"/index/"+str(user.user_id))
             else:
                 continue
     else:
@@ -182,7 +191,7 @@ def delete_image(request, id):
     images = ingredient_images.objects.get(id=id)
     os.remove(f".{images.ingredient_image.url}")
     images.delete()
-    return redirect("/")
+    return redirect("/index")
 
 def delete_saved_recipe(request, id):
     recipe = Recipe.objects.get(recipe_id=id)
@@ -200,7 +209,7 @@ def del_back_ing(request):
     ingredients.delete()
     return redirect(f"/images")
 
-def back(request):
+def back(request, id):
     path = get_keys("../recipeapp/sensitive.json")
     key = path['path']
     if os.path.isdir(key):  
@@ -215,7 +224,7 @@ def back(request):
             continue
         else:
             r.delete()
-    return redirect("/")
+    return redirect(f"/index/"+str(id))
 
 def del_back(request, id):
     path = get_keys("../recipeapp/sensitive.json")

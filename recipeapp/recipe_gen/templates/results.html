@@ -14,7 +14,7 @@
         <ul>There are {{n}}, {{i}}s</ul>
     {% endif %}
 {%endfor%}
-<a href="{% url 'add_remove_ing' id%}">
+<a href="{% url 'add_remove_ing' id id2%}">
     <button type="button" class="delete-button">Next</button>
 </a>
 <a href="{% url 'del_back' id%}">
