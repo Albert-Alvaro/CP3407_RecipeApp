@@ -16,7 +16,9 @@ urlpatterns = [
     path('saved_recipes', views.saved_recipes, name='saved_recipes'),
     path('bool-change/<int:id>', views.bool_change, name='bool-change'),
     path('del-saved-rec/<int:id>', views.delete_saved_recipe, name='del-saved-rec'),
-    path('recipe_page/<int:id>', views.recipe_page, name='recipe_page'), 
+    path('recipe_page/<int:id>', views.recipe_page, name='recipe_page'),
+    path('register', views.registration, name='register'),
+    path('login', views.login, name='login') 
 ]
 
 if settings.DEBUG:

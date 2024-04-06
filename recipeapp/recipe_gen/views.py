@@ -136,6 +136,46 @@ def recipe_page(request, id):
 
 """LLM and recipe stuff ends here"""
 
+"""User Login and Registration functions"""
+
+def registration(request):
+    if request.method == 'POST':
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            register = form.save(commit=False)
+            print(register)
+            register.save()
+            return redirect('/login')
+    else:
+        form=RegisterForm()
+    context = {
+        'form': form
+    }
+    return render(request, 'register.html', context)
+
+
+
+def login(request):
+    user_data = Users.objects.all()
+    username=""
+    password=""
+    if request.method == "POST":
+        username = request.POST["username"]
+        password = request.POST["password"]
+    if username != None and password !=None:
+        for user in user_data:
+            print(user.username, user.password)
+            if user.username == username and user.password == password:
+                return redirect('/back')
+            else:
+                continue
+    else:
+        pass
+    context={
+    }
+    return render(request, 'login.html', context)
+
+
 """Back and delete functions for general navigation"""
 
 def delete_image(request, id):

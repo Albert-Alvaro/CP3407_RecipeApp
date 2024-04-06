@@ -1,0 +1,16 @@
+{% extends 'layouts/page.html' %}
+{% load static %}
+
+{% block content %}
+
+<h3>Register Now!</h3>
+
+<form method='POST'>
+    {% csrf_token %}
+    {{form.as_p}}
+    <a href="{% url 'back' %}">
+        <button type="submit" class="btn btn-primary btn-sm" value="" href="{% url 'back' %}"> Register</button>
+    </a>
+</form>
+
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'layouts/page.html' %}
+{% load static %}
+
+{% block content %}
+
+<h3>Login Now!</h3>
+
+<form method="POST" action="login">
+    {% csrf_token %}
+    <input type="text" name="username">
+    <input type="text" name="password">
+
+    <button type="submit" class="delete-button">Login</button>
+</form>
+
+<h6>Don't have an account?</h6>
+<a href="{% url 'register' %}">
+    <button type="button" class="delete-button">Register Here!</button>
+</a>
+
+{% endblock %}
