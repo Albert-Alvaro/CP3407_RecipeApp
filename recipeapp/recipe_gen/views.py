@@ -157,10 +157,17 @@ def recipe_page(request, id, user_id):
             metric.save()
     else:
         form = MetricForm()
+    validation = Recipe_History.objects.all().filter(user_id=user_id)
+    if not validation:
+        flag = False
+    else:
+        flag = True
+    print(validation)
     context = {
         'user_id':user_id,
         'recipe': recipe,
         'form' : form,
+        'flag':flag
     }
     return render(request, 'recipe.html', context)
 

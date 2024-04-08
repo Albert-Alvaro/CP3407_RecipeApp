@@ -21,9 +21,16 @@
     <button type="submit"class="delete-button" value=""> Rate</button>
 </form>
 
+{% if flag == True %}
 <a href="{% url 'saved_recipes' user_id%}">
     <button type="button" class="delete-button">Back</button>
 </a>
+{% else %}
+<a href="{% url 'index' user_id%}">
+    <button type="button" class="delete-button">Back</button>
+</a>
+
+{% endif %}
 
 <h5>Current Review and Rating</h5>
 
