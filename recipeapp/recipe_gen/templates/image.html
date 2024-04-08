@@ -2,13 +2,13 @@
 
 {% block content %}
 <title>Images</title>
-<a href="{% url 'back' %}">
+<a href="{% url 'back' user_id %}">
     <button type="button" class="delete-button">Back</button>
 </a>
 
 {%for x, y in urls%}
 <ul>
-<a href="{%url 'results' x %}">
+<a href="{%url 'results' x user_id %}">
     <img src="{{y}}" style="width: 40%; height: 40%">
 </a>
 </ul>

@@ -24,3 +24,9 @@ class MetricForm(forms.ModelForm):
     class Meta:
         model = Recipe
         fields = ['recipe_rating', 'recipe_review']
+
+class RegisterForm(forms.ModelForm):
+
+    class Meta:
+        model=Users
+        fields = ['username','password']
