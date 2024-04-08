@@ -1,21 +1,37 @@
-{% extends 'layouts/page.html' %}
+{% extends 'layouts/index_temp.html' %}
 {% load static %}
 
 {% block content %}
 
+<nav class="navbar">
+    <div class="main-menu">
+    <a href="{% url 'back' user_id%}">
+        <img src="/media/logo/image.png" style="width: 20%; height: 10">
+    </a>
 
-{% for recipe in saved_recs %}
+    {% if flag != None %}
+    <a href="{% url 'saved_recipes' user_id%}">
+        <img src="/media/logo/bookmark.png" style="width: 30px ;height: 30px ; position:relative ; display: inline-block ; margin-left: 510px; margin-bottom: 10px;">
+    </a>
+    {% endif %}
+    </div>
+</nav>
+
+
+{% for rec in saved_recs %}
+{% for recipe in rec %}
 {% autoescape off %}
 <ul>{{recipe.recipe_content}}</ul>
 {% endautoescape %}
 {% if recipe.recipe_id != None %}
-<a href="{% url 'del-saved-rec' recipe.recipe_id %}">
+<a href="{% url 'del-saved-rec' recipe.recipe_id user_id%}">
     <button type="button" class="delete-button">Delete</button>
 </a>
-<a href="{% url 'recipe_page' recipe.recipe_id %}">
+<a href="{% url 'recipe_page' recipe.recipe_id user_id%}">
     <button type="button" class="delete-button">More</button>
 </a>
 {% endif %}
+{% endfor %}
 {% endfor %}
 
 {% endblock %}

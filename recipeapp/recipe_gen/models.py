@@ -27,8 +27,8 @@ class Prompts(models.Model):
     user_id = models.ForeignKey(Users, on_delete=models.CASCADE)
 
 class Recipe_History(models.Model):
-    user_id = models.ForeignKey(Users, on_delete=models.CASCADE)
-    recipe_id = models.ForeignKey(Recipe, on_delete=models.CASCADE)
+    user_id = models.IntegerField(null=False)
+    recipe_id = models.IntegerField(null=False)
 
 class ingredient_images(models.Model):
     id = models.BigAutoField(primary_key=True)
