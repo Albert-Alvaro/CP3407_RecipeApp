@@ -7,6 +7,13 @@
 {{recipe.recipe_content}}
 {% endautoescape %}
 
+{% if recipe.is_saved == False %}
+
+<a href="{% url 'bool-change' recipe.recipe_id user_id %}">
+    <button type="button" class="delete-button">Save</button>
+</a>
+
+{% endif %}
 <h5>Rate and Review the Recipe</h5>
 <form method='POST'>
     {% csrf_token %}

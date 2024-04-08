@@ -112,7 +112,7 @@ def llm_results(request, user_id):
         ings.append(i.ingredient_name)
     # recipe = LLM.generate_recipe(ings)
     # formatted_recipe = linebreaksbr(recipe)
-    formatted_recipe = "test"
+    formatted_recipe = "test1"
     print(formatted_recipe)
     saved_rec = Recipe()
     saved_rec.recipe_content = formatted_recipe
@@ -135,10 +135,6 @@ def bool_change(request, id, user_id):
     return redirect(f"/back/"+str(user_id))
 
 def saved_recipes(request, user_id):
-    recipes = Recipe.objects.all()
-    for r in recipes:
-        if r.is_saved == False:
-            r.delete()
     saved_recs = []
     saved_rec_id = Recipe_History.objects.filter(user_id=user_id)
     for saved in saved_rec_id:
@@ -167,6 +163,18 @@ def recipe_page(request, id, user_id):
         'form' : form,
     }
     return render(request, 'recipe.html', context)
+
+def global_recipe(request, user_id):
+    recipes = []
+    recipe = Recipe.objects.all()
+    for i in recipe:
+        recipes.append(i)
+    print(recipes)
+    context={
+        'user_id': user_id,
+        'recipes':recipes
+    }
+    return render(request, 'global_recipe.html', context)
 
 """LLM and recipe stuff ends here"""
 
@@ -245,12 +253,6 @@ def back(request, user_id):
         pass
     ingredients = Ingredients.objects.all()
     ingredients.delete()
-    recipe = Recipe.objects.all()
-    for r in recipe:
-        if r.is_saved == True:
-            continue
-        else:
-            r.delete()
     return redirect(f"/index/"+str(user_id))
 
 def del_back(request, user_id):

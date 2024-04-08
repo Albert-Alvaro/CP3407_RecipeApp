@@ -8,9 +8,12 @@
         <img src="/media/logo/image.png" style="width: 20%; height: 10">
     </a>
 
+    <a href="{% url 'global' user_id%}">
+        <img src="/media/logo/global.png" style="width: 30px ;height: 30px ; position:relative ; display: inline-block ; margin-left: 450px; margin-bottom: 10px;">
+    </a>
     {% if flag != None %}
     <a href="{% url 'saved_recipes' user_id%}">
-        <img src="/media/logo/bookmark.png" style="width: 30px ;height: 30px ; position:relative ; display: inline-block ; margin-left: 510px; margin-bottom: 10px;">
+        <img src="/media/logo/bookmark.png" style="width: 30px ;height: 30px ; position:relative ; display: inline-block ; margin-left: 10px; margin-bottom: 10px;">
     </a>
     {% endif %}
     </div>

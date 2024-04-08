@@ -18,6 +18,7 @@ urlpatterns = [
     path('del-saved-rec/<int:id>/<int:user_id>', views.delete_saved_recipe, name='del-saved-rec'),
     path('recipe_page/<int:id>/<int:user_id>', views.recipe_page, name='recipe_page'),
     path('register', views.registration, name='register'),
+    path('global/<int:user_id>', views.global_recipe, name='global'),
     path('', views.login, name='login') 
 ]
 

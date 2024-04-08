@@ -1,0 +1,27 @@
+{% extends 'layouts/index_temp.html' %}
+{% load static %}
+
+{% block content %}
+
+<nav class="navbar">
+    <div class="main-menu">
+    <a href="{% url 'back' user_id%}">
+        <img src="/media/logo/image.png" style="width: 20%; height: 10">
+    </a>
+
+    {% if flag != None %}
+    <a href="{% url 'saved_recipes' user_id%}">
+        <img src="/media/logo/bookmark.png" style="width: 30px ;height: 30px ; position:relative ; display: inline-block ; margin-left: 510px; margin-bottom: 10px;">
+    </a>
+    {% endif %}
+    </div>
+</nav>
+
+{% for recipe in recipes %}
+<ul>{{recipe.recipe_content}}</ul>
+<a href="{% url 'recipe_page' recipe.recipe_id user_id %}">
+    <button type="button" class="delete-button">More</button>
+</a>
+{% endfor %}
+
+{% endblock %}
