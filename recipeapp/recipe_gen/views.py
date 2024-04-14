@@ -83,7 +83,7 @@ def results(request, id, user_id):
     
     return render(request, 'results.html', context)
 
-def add_remove_ingredients(request, id, user_id):
+def add_remove_ingredients(request, user_id):
     if request.method == 'POST':
         form = IngredientForm(request.POST)
         if form.is_valid():
@@ -96,7 +96,6 @@ def add_remove_ingredients(request, id, user_id):
         'user_id':user_id,
         'form' : form,
         'ingredients': ingredients,
-        'id': id
     }
     return render(request, 'add_remove_ing.html', context)
 

@@ -1,10 +1,24 @@
-{% extends 'layouts/page.html' %}
+{% extends 'layouts/index_temp.html' %}
 
 {% block content %}
+<nav class="navbar">
+    <div class="main-menu">
+    <a href="{% url 'back' user_id%}">
+        <img src="/media/logo/image.png" style="width: 20%; height: 10">
+    </a>
+
+    <a href="{% url 'global' user_id%}">
+        <img src="/media/logo/global.png" style="width: 30px ;height: 30px ; position:relative ; display: inline-block ; margin-left: 450px; margin-bottom: 10px;">
+    </a>
+    {% if flag != None %}
+    <a href="{% url 'saved_recipes' user_id%}">
+        <img src="/media/logo/bookmark.png" style="width: 30px ;height: 30px ; position:relative ; display: inline-block ; margin-left: 10px; margin-bottom: 10px;">
+    </a>
+    {% endif %}
+    </div>
+</nav>
+
 <title>Images</title>
-<a href="{% url 'back' user_id %}">
-    <button type="button" class="delete-button">Back</button>
-</a>
 
 {%for x, y in urls%}
 <ul>
@@ -16,4 +30,8 @@
     <button type="button" class="delete-button">Delete</button>
 </a>
 {% endfor %}
+
+<a href="{% url 'add_remove_ing' user_id %}">
+    <button type="button" class="delete-button">Next</button>
+</a>
 {% endblock %}
