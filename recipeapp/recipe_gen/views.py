@@ -241,10 +241,9 @@ def delete_saved_recipe(request, id, user_id):
     return redirect(f"/index/"+str(user_id))
 
 def del_back_ing(request, user_id):
-    path = get_keys("../recipeapp/sensitive.json")
-    key = path['path']
-    if os.path.isdir(key):  
-        shutil.rmtree(f"{key}")
+    path = f"{os.getcwd()}\\recipe_gen\\static\\output_images"
+    if os.path.isdir(path):  
+        shutil.rmtree(f"{path}")
     else:
         pass
     ingredients = Ingredients.objects.all()
@@ -252,10 +251,9 @@ def del_back_ing(request, user_id):
     return redirect(f"/images/"+str(user_id))
 
 def back(request, user_id):
-    path = get_keys("../recipeapp/sensitive.json")
-    key = path['path']
-    if os.path.isdir(key):  
-        shutil.rmtree(f"{key}")
+    path = f"{os.getcwd()}\\recipe_gen\\static\\output_images"
+    if os.path.isdir(path):  
+        shutil.rmtree(f"{path}")
     else:
         pass
     ingredients = Ingredients.objects.all()
@@ -263,10 +261,9 @@ def back(request, user_id):
     return redirect(f"/index/"+str(user_id))
 
 def del_back(request, user_id):
-    path = get_keys("../recipeapp/sensitive.json")
-    key = path['path']
-    if os.path.isdir(key):  
-        shutil.rmtree(f"{key}")
+    path = f"{os.getcwd()}\\recipe_gen\\static\\output_images"
+    if os.path.isdir(path):  
+        shutil.rmtree(f"{path}")
     else:
         pass
     ingredients = Ingredients.objects.all()
