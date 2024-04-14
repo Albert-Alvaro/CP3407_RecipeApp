@@ -229,11 +229,11 @@ def login(request):
 
 """Back and delete functions for general navigation"""
 
-def delete_image(request, id):
+def delete_image(request, id, user_id):
     images = ingredient_images.objects.get(id=id)
     os.remove(f".{images.ingredient_image.url}")
     images.delete()
-    return redirect(f"/index/"+str(id))
+    return redirect(f"/index/"+str(user_id))
 
 def delete_saved_recipe(request, id, user_id):
     history = Recipe_History.objects.get(recipe_id=id, user_id=user_id)
