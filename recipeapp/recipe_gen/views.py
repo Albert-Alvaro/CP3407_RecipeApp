@@ -27,6 +27,7 @@ def index(request, user_id):
         if form2.is_valid():
             ingredient = form2.save(commit=False)
             ingredient.save()
+            form2 = IngredientForm()
     else:
         form2 = IngredientForm()
     instance = []
@@ -89,6 +90,7 @@ def add_remove_ingredients(request, user_id):
         if form.is_valid():
             ingredient = form.save(commit=False)
             ingredient.save()
+            form = IngredientForm
     else:
         form = IngredientForm
     ingredients = Ingredients.objects.all()
@@ -154,6 +156,7 @@ def recipe_page(request, id, user_id):
         if form.is_valid():
             metric = form.save(commit=False)
             metric.save()
+            form = MetricForm()
     else:
         form = MetricForm()
     validation = Recipe_History.objects.all().filter(user_id=user_id)
