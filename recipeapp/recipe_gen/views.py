@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponseRedirect
 from .forms import *
 from .yolo import *
 import shutil
@@ -113,7 +113,7 @@ def llm_results(request, user_id):
         ings.append(i.ingredient_name)
     # recipe = LLM.generate_recipe(ings)
     # formatted_recipe = linebreaksbr(recipe)
-    formatted_recipe = "test1"
+    formatted_recipe = "test2"
     print(formatted_recipe)
     saved_rec = Recipe()
     saved_rec.recipe_content = formatted_recipe
@@ -149,27 +149,47 @@ def saved_recipes(request, user_id):
     return render(request, 'saved_recipes.html', context)
 
 def recipe_page(request, id, user_id):
+    flag = True
     recipe = Recipe.objects.get(recipe_id=id)
+    history = Recipe_History.objects.all().filter(user_id=user_id)
+    user_data = Users.objects.get(user_id=user_id)
+    reviews = Reviews.objects.all().filter(recipe_id=id)
 
-    if request.method == 'POST':
-        form = MetricForm(request.POST, instance=recipe)
-        if form.is_valid():
-            metric = form.save(commit=False)
-            metric.save()
-            form = MetricForm()
+    """Checks Starts"""
+    for h in history:
+        if h.recipe_id == id:
+            flag = False
+        else:
+            flag = True
+    instance = []
+    saved_recs = Recipe_History.objects.filter(user_id=user_id)
+    for i in saved_recs:
+        instance.append(i)
+    if instance == []:
+        flag1 = None
     else:
-        form = MetricForm()
-    validation = Recipe_History.objects.all().filter(user_id=user_id)
-    if not validation:
-        flag = False
-    else:
-        flag = True
-    print(validation)
+        flag1 = 1
+    """Checks Ends"""
+
+    recipe_rating=""
+    recipe_review=""
+    review = Reviews()
+    if request.method == "POST":
+        recipe_rating = request.POST["recipe_rating"]
+        recipe_review = request.POST["recipe_review"]
+        review.recipe_review = recipe_review
+        review.recipe_rating = recipe_rating
+        review.username = user_data.username
+        review.recipe_id = id
+        review.save()
+        return HttpResponseRedirect(f"/recipe/"+str(id)+"/"+str(user_id))
+    print(reviews)
     context = {
         'user_id':user_id,
         'recipe': recipe,
-        'form' : form,
-        'flag':flag
+        'flag':flag,
+        'flag1':flag1,
+        'reviews':reviews
     }
     return render(request, 'recipe.html', context)
 
@@ -190,16 +210,24 @@ def global_recipe(request, user_id):
 """User Login and Registration functions"""
 
 def registration(request):
+    user_data = Users.objects.all()
+    message=""
+    usernames = []
+    for u in user_data:
+        usernames.append(u.username)
     if request.method == 'POST':
         form = RegisterForm(request.POST)
-        if form.is_valid():
+        username = request.POST["username"]
+        if form.is_valid() and username not in usernames:
             register = form.save(commit=False)
-            print(register)
             register.save()
             return redirect('/')
+        else:
+            message = "Username already exists"
     else:
         form=RegisterForm()
     context = {
+        'message':message,
         'form': form
     }
     return render(request, 'register.html', context)
