@@ -1,13 +1,27 @@
-{% extends 'layouts/page.html' %}
+{% extends 'layouts/index_temp.html' %}
 {% load static %}
 
 {% block content %}
+
+<nav class="navbar">
+    <div class="main-menu">
+    <a href="{% url 'back' user_id%}">
+        <img src="/media/logo/image.png" style="width: 20%; height: 10">
+    </a>
+
+    {% if flag != None %}
+    <a href="{% url 'saved_recipes' user_id%}">
+        <img src="/media/logo/bookmark.png" style="width: 30px ;height: 30px ; position:relative ; display: inline-block ; margin-left: 510px; margin-bottom: 10px;">
+    </a>
+    {% endif %}
+    </div>
+</nav>
 
 {% autoescape off %}
 {{recipe.recipe_content}}
 {% endautoescape %}
 
-{% if recipe.is_saved == False %}
+{% if flag == True %}
 
 <a href="{% url 'bool-change' recipe.recipe_id user_id %}">
     <button type="button" class="delete-button">Save</button>

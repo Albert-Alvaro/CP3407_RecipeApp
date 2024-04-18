@@ -113,7 +113,7 @@ def llm_results(request, user_id):
         ings.append(i.ingredient_name)
     # recipe = LLM.generate_recipe(ings)
     # formatted_recipe = linebreaksbr(recipe)
-    formatted_recipe = "test1"
+    formatted_recipe = "test2"
     print(formatted_recipe)
     saved_rec = Recipe()
     saved_rec.recipe_content = formatted_recipe
@@ -149,8 +149,14 @@ def saved_recipes(request, user_id):
     return render(request, 'saved_recipes.html', context)
 
 def recipe_page(request, id, user_id):
+    flag = True
     recipe = Recipe.objects.get(recipe_id=id)
-
+    history = Recipe_History.objects.all().filter(user_id=user_id)
+    for h in history:
+        if h.recipe_id == id:
+            flag = False
+        else:
+            flag = True
     if request.method == 'POST':
         form = MetricForm(request.POST, instance=recipe)
         if form.is_valid():
@@ -159,12 +165,6 @@ def recipe_page(request, id, user_id):
             form = MetricForm()
     else:
         form = MetricForm()
-    validation = Recipe_History.objects.all().filter(user_id=user_id)
-    if not validation:
-        flag = False
-    else:
-        flag = True
-    print(validation)
     context = {
         'user_id':user_id,
         'recipe': recipe,
