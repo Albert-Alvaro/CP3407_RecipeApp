@@ -190,16 +190,24 @@ def global_recipe(request, user_id):
 """User Login and Registration functions"""
 
 def registration(request):
+    user_data = Users.objects.all()
+    message=""
+    usernames = []
+    for u in user_data:
+        usernames.append(u.username)
     if request.method == 'POST':
         form = RegisterForm(request.POST)
-        if form.is_valid():
+        username = request.POST["username"]
+        if form.is_valid() and username not in usernames:
             register = form.save(commit=False)
-            print(register)
             register.save()
             return redirect('/')
+        else:
+            message = "Username already exists"
     else:
         form=RegisterForm()
     context = {
+        'message':message,
         'form': form
     }
     return render(request, 'register.html', context)

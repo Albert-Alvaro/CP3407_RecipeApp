@@ -5,6 +5,8 @@
 
 <h3>Register Now!</h3>
 
+<h2>{{ message }}</h2>
+
 <form method='POST' action="">
     {% csrf_token %}
     {{form.as_p}}
