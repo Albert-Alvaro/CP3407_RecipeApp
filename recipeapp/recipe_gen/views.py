@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponseRedirect
 from .forms import *
 from .yolo import *
 import shutil
@@ -152,24 +152,44 @@ def recipe_page(request, id, user_id):
     flag = True
     recipe = Recipe.objects.get(recipe_id=id)
     history = Recipe_History.objects.all().filter(user_id=user_id)
+    user_data = Users.objects.get(user_id=user_id)
+    reviews = Reviews.objects.all().filter(recipe_id=id)
+
+    """Checks Starts"""
     for h in history:
         if h.recipe_id == id:
             flag = False
         else:
             flag = True
-    if request.method == 'POST':
-        form = MetricForm(request.POST, instance=recipe)
-        if form.is_valid():
-            metric = form.save(commit=False)
-            metric.save()
-            form = MetricForm()
+    instance = []
+    saved_recs = Recipe_History.objects.filter(user_id=user_id)
+    for i in saved_recs:
+        instance.append(i)
+    if instance == []:
+        flag1 = None
     else:
-        form = MetricForm()
+        flag1 = 1
+    """Checks Ends"""
+
+    recipe_rating=""
+    recipe_review=""
+    review = Reviews()
+    if request.method == "POST":
+        recipe_rating = request.POST["recipe_rating"]
+        recipe_review = request.POST["recipe_review"]
+        review.recipe_review = recipe_review
+        review.recipe_rating = recipe_rating
+        review.username = user_data.username
+        review.recipe_id = id
+        review.save()
+        return HttpResponseRedirect(f"/recipe/"+str(id)+"/"+str(user_id))
+    print(reviews)
     context = {
         'user_id':user_id,
         'recipe': recipe,
-        'form' : form,
-        'flag':flag
+        'flag':flag,
+        'flag1':flag1,
+        'reviews':reviews
     }
     return render(request, 'recipe.html', context)
 

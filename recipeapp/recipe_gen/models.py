@@ -11,10 +11,15 @@ class Recipe(models.Model):
     recipe_id = models.BigAutoField(primary_key=True)
     recipe_content = models.TextField(null=True)
     recipe_steps = models.CharField(max_length=40000)
-    recipe_rating = models.IntegerField(validators=[MaxValueValidator(5), MinValueValidator(1)], null=True)
-    recipe_review = models.TextField(null=True)
     recipe_category = models.CharField(max_length=45)
     is_saved = models.BooleanField(default=False)
+
+class Reviews(models.Model):
+    review_id = models.BigAutoField(primary_key=True)
+    recipe_id = models.IntegerField()
+    username = models.CharField(max_length=100, default="")
+    recipe_rating = models.IntegerField(validators=[MaxValueValidator(5), MinValueValidator(1)], null=True)
+    recipe_review = models.TextField(null=True)
 
 class Ingredients(models.Model):
     ingredient_id = models.BigAutoField(primary_key=True)

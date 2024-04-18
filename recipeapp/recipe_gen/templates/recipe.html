@@ -9,7 +9,7 @@
         <img src="/media/logo/image.png" style="width: 20%; height: 10">
     </a>
 
-    {% if flag != None %}
+    {% if flag1 != None %}
     <a href="{% url 'saved_recipes' user_id%}">
         <img src="/media/logo/bookmark.png" style="width: 30px ;height: 30px ; position:relative ; display: inline-block ; margin-left: 510px; margin-bottom: 10px;">
     </a>
@@ -29,10 +29,23 @@
 
 {% endif %}
 <h5>Rate and Review the Recipe</h5>
-<form method='POST'>
+<form method="POST" action="">
     {% csrf_token %}
-    {{form.as_p}}
-    <button type="submit"class="delete-button" value=""> Rate</button>
+    <p>Select a Rating!</p>
+    <input type="radio" id="1" name="recipe_rating" value="1">
+    <label for="1">1</label><br>
+    <input type="radio" id="2" name="recipe_rating" value="2">
+    <label for="2">2</label><br>
+    <input type="radio" id="3" name="recipe_rating" value="3">
+    <label for="3">3</label><br>
+    <input type="radio" id="4" name="recipe_rating" value="4">
+    <label for="4">4</label><br>
+    <input type="radio" id="5" name="recipe_rating" value="5">
+    <label for="5">5</label><br>
+
+    <p>Leave a Review!</p>
+    <input type="text" name="recipe_review">
+    <button type="submit" class="delete-button">Submit</button>
 </form>
 
 {% if flag == True %}
@@ -48,7 +61,11 @@
 
 <h5>Current Review and Rating</h5>
 
-<ul>Review : {{recipe.recipe_review}}</ul>
-<ul>Rating : {{recipe.recipe_rating}}</ul>
+{% for review in reviews %}
+<ul>User : {{review.username}}</ul>
+<ul>Review : {{review.recipe_review}}</ul>
+<ul>Rating : {{review.recipe_rating}}</ul>
+<p>--------------------</p>
+{% endfor %}
 
 {% endblock %}
