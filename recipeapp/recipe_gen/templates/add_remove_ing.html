@@ -4,7 +4,13 @@
 {% block content %}
 <h2>Currently Possessed Ingredients</h2>
 {%for n in ingredients%}
-    <ol>{{n.ingredient_name}}</ol>
+    <ol>{{n.ingredient_name}}
+
+        <a href="{% url 'delete_ingredient' user_id n.ingredient_id%}">
+            <button type="submit">Delete</button>
+        </a>
+
+    </ol>
 {% endfor %}
 <form method='POST'>
     {% csrf_token %}

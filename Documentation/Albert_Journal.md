@@ -60,3 +60,13 @@ Improved upon the code such that it is not reliant on the sensitive.json file to
 ### 15/4/2024
 
 Firstly, made it so that any forms which requires user to input something will be cleared out after they had submitted their input, this is done through reinitializing an empty form after the preivous one's input data has been saved. Also fixed a bug with the delete image button, there was an issue with the piping of variables, the user id and id being mixed up and thus causing an issue with the function, it was fixed by simply adding an id variable to the url of delete image.
+
+### 18/4/2024
+
+Improved upon the save functionality, allowing for a recipe to be saved by multiple users. This was something that could ahve always been done but the previous infrastructure had persisted since it has always worked. but the one recipe one user thing has always beens omething that could have been easily imporved upon, but the priority of it has been lower compared ot the other functions. But now I have finally gotten around to it, and have managed to wire it up in such a way that the bridging table is working as intended, creating a many to many relationship between the users and recipes. The code has finally been updated to utilize this infrastructure to make it so that a recipe can be saved by multiple users.
+
+Usernames are now unique, this is done pretty simply by getting all of the usernames currently in the database, making a list out of it, and checking the username that is going to be registered against the list, notifying th euser that the username already exists if they try to create an account with a pre-existing username.
+
+### 19/4/2024
+
+Improved the ratings and review system by allowing for there to be multiple reviews and ratings to be left on a single recipe. This was done by revamping the entire form of the ratings and reviews, restructuring the database to accomodate a new entity table specifically for reviews, creating a foreign key to link the recipe and the review, fixed a bug in regards to reviews and ratings being saved whenever the page has been refreshed and to add another flag to ensure that the saved recipes tab is still functional, needed since there is already another flag being in used here for the save button.

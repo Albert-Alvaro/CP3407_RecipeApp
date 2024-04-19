@@ -19,6 +19,7 @@ urlpatterns = [
     path('recipe_page/<int:id>/<int:user_id>', views.recipe_page, name='recipe_page'),
     path('register', views.registration, name='register'),
     path('global/<int:user_id>', views.global_recipe, name='global'),
+    path('delete_ingredient/<int:user_id>/<int:ing_id>', views.delete_ingredient, name='delete_ingredient'),
     path('', views.login, name='login') 
 ]
 
