@@ -2,17 +2,41 @@
 {% load static %}
 
 {% block content %}
-<h3>Recipe Available</h3>
-{% autoescape off %}
-{{recipe}}
-{% endautoescape %}
-<a href="{% url 'del_back_ing' user_id%}">
-    <button type="button" class="delete-button">Back</button>
-</a>
 
-<a href="{% url 'bool-change' saved_rec.recipe_id user_id %}">
-    <button type="button" class="delete-button">Save</button>
-</a>
+<div class="overlay">
+
+    <!--This class is for the navigation bar which has the logo and the menu options i.e. About us, Browse Recipes...-->
+    <div class="navigation">
+        <div class="logo">
+            <a href="{% url 'back' user_id%}">
+                <img src="/media/logo/image.png" style="width: 20%; height: 10;"> 
+            </a>
+        </div>
+        
+        <ul>
+            <li><a href="#"> ABOUT US </a> </li>
+            <li><a href="{% url 'global' user_id%}"> BROWSE RECIPES </a> </li>
+        </ul>
+    </div>
+
+
+    <!--This class contains all the functions of this page-->
+    <div class="result-goofy">
+        <h3>Recipe Available</h3>
+        {% autoescape off %}
+        {{recipe}}
+        {% endautoescape %}
+        <a href="{% url 'del_back_ing' user_id%}">
+            <button type="button" class="delete-button">Back</button>
+        </a>
+        
+        <a href="{% url 'bool-change' saved_rec.recipe_id user_id %}">
+            <button type="button" class="delete-button">Save</button>
+        </a>
+    </div>
+
+</div>
+
 
 
 {% endblock %}

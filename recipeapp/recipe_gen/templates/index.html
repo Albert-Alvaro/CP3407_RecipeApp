@@ -2,43 +2,69 @@
 
 {% block content %}
 
-<nav class="navbar">
-    <div class="main-menu">
-    <a href="{% url 'back' user_id%}">
-        <img src="/media/logo/image.png" style="width: 20%; height: 10">
-    </a>
+<style>
 
-    <a href="{% url 'global' user_id%}">
-        <img src="/media/logo/global.png" style="width: 30px ;height: 30px ; position:relative ; display: inline-block ; margin-left: 450px; margin-bottom: 10px;">
-    </a>
-    {% if flag != None %}
-    <a href="{% url 'saved_recipes' user_id%}">
-        <img src="/media/logo/bookmark.png" style="width: 30px ;height: 30px ; position:relative ; display: inline-block ; margin-left: 10px; margin-bottom: 10px;">
-    </a>
-    {% endif %}
+    h2{
+        font-weight: 500;
+        font-family: fantasy;
+        padding: 30px;
+    }
+
+</style>
+
+<div class="overlay">
+
+    <!--This class is for the navigation bar which has the logo and the menu options i.e. About us, Browse Recipes...-->
+    <div class="navigation">
+        <div class="logo">
+            <a href="{% url 'back' user_id%}">
+                <img src="/media/logo/image.png" style="width: 20%; height: 10;"> 
+            </a>
+        </div>
+        
+        <ul>
+            <li><a href="#"> ABOUT US </a> </li>
+            <li><a href="{% url 'global' user_id%}"> BROWSE RECIPES </a> </li>
+        </ul>
     </div>
-</nav>
 
-<h2>Upload Image of Ingredients</h2>
-<form method = "post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" name="image" class="delete-button">Upload</button>
-</form>
+    <!-- This class is a mystery class which needs to dissolved into the class above so that it can function together-->
+    <div class="navbar">
+        <div class="main-menu">
+            {% if flag != None %}
+            <a href="{% url 'saved_recipes' user_id%}">
+                <img src="/media/logo/bookmark.png" style="width: 30px ;height: 30px ; position:relative ; display: inline-block ; margin-left: 10px; margin-bottom: 10px;">
+            </a>
+            {% endif %}
+        </div>
+    </div>
+    
+    <!--This class contains all the functions of this page-->
+    <div class="main-main-content">
+        <h2>Upload Image of Ingredients</h2>
+        <form method = "post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" name="image" class="delete-button">Upload</button>
+        </form>
+        
+        <h2>Manually Add Ingredients</h2>
+        <h4>Ingredients Currently in Possession</h4>
+        {%for n in ingredients%}
+        <ol>{{n.ingredient_name}}</ol>
+        {% endfor %}
 
-<h2>Manually Add Ingredients</h2>
-<h4>Ingredients Currently in Possession</h4>
-{%for n in ingredients%}
-    <ol>{{n.ingredient_name}}</ol>
-{% endfor %}
-<form method='POST'>
-    {% csrf_token %}
-    {{form2.as_p}}
-    <button type="submit" name="manual" class="delete-button" value=""> Add</button>
-</form>
+        <form method='POST'>
+            {% csrf_token %}
+            {{form2.as_p}}
+            <button type="submit" name="manual" class="delete-button" value=""> Add</button>
+        </form>
+    
+        <a href="{% url 'images' user_id %}">
+            <button type="button" class="delete-button">Next</button>
+        </a>
+    </div>
 
-<a href="{% url 'images' user_id %}">
-    <button type="button" class="delete-button">Next</button>
-</a>
+</div>
 
 {% endblock %}
