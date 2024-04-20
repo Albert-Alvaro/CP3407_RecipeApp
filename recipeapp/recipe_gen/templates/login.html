@@ -3,8 +3,6 @@
 
 {% block content %}
 
-<div class="overlay">
-
 
     <div class="login-form">
         <h3>Login Now!</h3>
@@ -12,19 +10,20 @@
             {% csrf_token %}
             <input type="text" name="username">
             <input type="text" name="password">
-            <button type="submit" class="delete-button">Login</button>
+            <br>
+            <button type="submit" class="button">Login</button>
         </form>
+
+        <br>
     
-        <h6>Don't have an account?</h6>
+        <h3>Don't have an account?</h3>
         <a href="{% url 'register' %}">
-            <button type="button" class="delete-button">Register Here!</button>
+            <button type="button" class="button">Register Here!</button>
         </a>
     
     
     </div>
 
 
-
-</div>
 
 {% endblock %}

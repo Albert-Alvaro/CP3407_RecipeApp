@@ -2,16 +2,16 @@
 {% load static %}
 
 {% block content %}
-<div class="overlay">
     <!--This class contains all the functions of this page-->
     <div class="reg-now">
-        <h3>Register Now!</h3>
+        <h1>Register Now!</h1>
+        <br>
+        <h2>{{ message }}</h2>
+        <br>
         <form method='POST' action="">
             {% csrf_token %}
             {{form.as_p}}
-            <button type="submit" class="btn btn-primary btn-sm" value=""> Register</button>
+            <button type="submit" class="button" value=""> Register</button>
         </form>
     </div>
-
-</div>
 {% endblock %}

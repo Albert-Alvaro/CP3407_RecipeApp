@@ -88,6 +88,7 @@ def add_remove_ingredients(request, user_id):
             ingredient = form.save(commit=False)
             ingredient.save()
             form = IngredientForm
+            return HttpResponseRedirect(f"/add_remove_ing/"+str(user_id))
     else:
         form = IngredientForm
     ingredients = Ingredients.objects.all()

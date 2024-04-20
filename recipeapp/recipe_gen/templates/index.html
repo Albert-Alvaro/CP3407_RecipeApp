@@ -48,18 +48,14 @@
         <ul>
             <li><a href="#"> ABOUT US </a> </li>
             <li><a href="{% url 'global' user_id%}"> BROWSE RECIPES </a> </li>
+            <li>
+                {% if flag != None %}
+                <a href="{% url 'saved_recipes' user_id%}">
+                    <img src="/media/logo/bookmark.png" style="width: 30px ;height: 30px ; position:relative ; display: inline-block ; margin-left: 10px; margin-bottom: 10px;">
+                </a>
+                {% endif %}
+            </li>
         </ul>
-    </div>
-
-    <!-- This class is a mystery class which needs to dissolved into the class above so that it can function together-->
-    <div class="navbar">
-        <div class="main-menu">
-            {% if flag != None %}
-            <a href="{% url 'saved_recipes' user_id%}">
-                <img src="/media/logo/bookmark.png" style="width: 30px ;height: 30px ; position:relative ; display: inline-block ; margin-left: 10px; margin-bottom: 10px;">
-            </a>
-            {% endif %}
-        </div>
     </div>
 
     <div class="edward">
@@ -83,7 +79,13 @@
                     {% csrf_token %}
                     {{form2.as_p}}
                     {%for n in ingredients%}
-                    <ol class="list-ingredients">{{n.ingredient_name}}</ol>
+                    <ol class="list-ingredients">
+                        {{n.ingredient_name}}
+                    <a href="{% url 'delete_ingredient' user_id n.ingredient_id%}">
+                        <button type="submit" class="button-del">Delete</button>
+                    </a>
+            
+                    </ol>
                     {% endfor %}
                     <button type="submit" name="manual" class="add-button-index" value=""> Add</button>
                 </form>

@@ -53,6 +53,166 @@ body {
   padding: 30px;
 }
 
+.login-form{
+  background-color: #FFE5E1;
+  width: 500px;
+  height: auto;
+  padding: 24px; 
+  margin-top: 100px;
+  border-style: groove;
+  border-radius: 20px;
+}
+
+.reg-now{
+  background-color: #FFE5E1;
+  width: 500px;
+  height: auto;
+  padding: 24px; 
+  margin-top: 100px;
+  border-style: groove;
+  border-radius: 20px;
+}
+
+.dis-img{
+  background-color: #FFE5E1;
+  width: 100%;
+  height: auto;
+  padding: 24px; 
+  margin-top: 100px;
+  border-style: groove;
+  border-radius: 20px;
+}
+
+.pos-ing{
+  background-color: #FFE5E1;
+  width: 40%;
+  height: auto;
+  padding: 24px; 
+  margin-top: 100px;
+  margin: 200px auto;
+  border-style: groove;
+  border-radius: 20px;
+}
+
+.result-goofy{
+  background-color: #FFE5E1;
+  width: 50%;
+  height: auto;
+  padding: 24px; 
+  margin-top: 100px;
+  margin: 200px auto;
+  border-style: groove;
+  border-radius: 20px;
+}
+
+.save-my-cook{
+  background-color: #FFE5E1;
+  width: 50%;
+  height: auto;
+  padding: 24px; 
+  margin-top: 100px;
+  margin: 200px auto;
+  border-style: groove;
+  border-radius: 20px;
+}
+
+.recipe{
+  background-color: #FFE5E1;
+  width: 50%;
+  height: auto;
+  padding: 24px; 
+  margin-top: 100px;
+  margin: 200px auto;
+  border-style: groove;
+  border-radius: 20px;
+}
+
+.more-more{
+  background-color: #FFE5E1;
+  width: 50%;
+  height: auto;
+  padding: 24px; 
+  margin-top: 100px;
+  margin: 200px auto;
+  border-style: groove;
+  border-radius: 20px;
+}
+
+.obj-result{
+  background-color: #FFE5E1;
+  width: 50%;
+  height: auto;
+  padding: 24px; 
+  margin-top: 100px;
+  margin: 200px auto;
+  border-style: groove;
+  border-radius: 20px;
+}
+
+.button{
+  margin:10px auto; 
+  width: 80px;
+  letter-spacing: 2px;
+  border-radius: 8px;
+  font-family: 'Skranji', cursive;
+  color: #ffc000;
+  font-size: 12px;
+  font-weight: 400;
+  text-shadow: 0 1px 3px #000;
+  text-align: center;
+  padding: 10px 0;
+  background:radial-gradient(circle, #8b0000, #8b0000);
+  border-top: 4px ridge #ffb000;
+  border-left: 4px groove #ffb000;
+  border-right: 4px ridge #ffb000;
+  border-bottom: 4px groove #ffb000; 
+  box-shadow: inset 0px 0px 5px 3px rgba(1, 1, 1, 0.3);
+
+  margin-top: 20px;
+}
+
+.button:hover{
+  background: radial-gradient(circle, #e52b2b, #8b0000);
+  box-shadow: 0px 0 5px 5px rgba(255, 255, 255, 0.2);
+}
+
+.button:active{
+  background: radial-gradient(circle, #ec6a6a, #e52b2b);
+  box-shadow: 0px 0 5px 5px rgba(255,255,255,0.2);
+}
+
+.button-del{
+  margin:5px auto; 
+  width: 60px;
+  letter-spacing: 0.1px;
+  border-radius: 8px;
+  font-family: 'Skranji', cursive;
+  color: #ffc000;
+  font-size: 10px;
+  font-weight: 400;
+  text-shadow: 0 1px 3px #000;
+  text-align: center;
+  padding: 5px 0;
+  background:radial-gradient(circle, #8b0000, #8b0000);
+  border-top: 2px ridge #ffb000;
+  border-left: 4px groove #ffb000;
+  border-right: 4px ridge #ffb000;
+  border-bottom: 4px groove #ffb000; 
+  box-shadow: inset 0px 0px 5px 3px rgba(1, 1, 1, 0.3);
+
+  margin-top: 20px;
+}
+
+.button-del:hover{
+  background: radial-gradient(circle, #e52b2b, #8b0000);
+  box-shadow: 0px 0 5px 5px rgba(255, 255, 255, 0.2);
+}
+
+.button-del:active{
+  background: radial-gradient(circle, #ec6a6a, #e52b2b);
+  box-shadow: 0px 0 5px 5px rgba(255,255,255,0.2);
+}
+
 /* Style for index.html ONLY */
 .upload-content{
   background-color: #FFE5E1;
@@ -108,10 +268,6 @@ body {
   overflow: hidden;
   font-size: 19px;
   float: left;
-}
-
-.pos-ing{
-  padding: 200px;
 }
 
 .edward{

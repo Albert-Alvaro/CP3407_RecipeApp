@@ -3,11 +3,5 @@
     <a href="{% url 'login' %}">
         <img src="/media/logo/image.png" style="width: 20%; height: 10">
     </a>
-
-    {% if id.isDigit %}
-    <a href="{% url 'saved_recipes' id%}">
-        <img src="/media/logo/bookmark.png" style="width: 30px ;height: 30px ; position:relative ; display: inline-block ; margin-left: 510px; margin-bottom: 10px;">
-    </a>
-    {% endif %}
     </div>
 </nav>
