@@ -1,4 +1,4 @@
-{% extends 'layouts/page.html' %}
+{% extends 'layouts/index_temp.html' %}
 {% load static %}
 
 {% block content %}
@@ -9,7 +9,7 @@
     <div class="navigation">
         <div class="logo">
             <a href="{% url 'back' user_id%}">
-                <img src="/media/logo/image.png" style="width: 20%; height: 10; visibility: hidden;">
+                <img src="/media/logo/image.png" style="width: 20%; height: 10;">
 
                 <!-- For some reason there are double logos appearing on my screen only in this page, so for now the 
                 logo will be hidden but that can be changed by removing the visibility feature-->

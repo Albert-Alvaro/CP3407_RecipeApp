@@ -1,23 +1,44 @@
-{% extends 'layouts/page.html' %}
+{% extends 'layouts/index_temp.html' %}
 {% load static %}
 
 {% block content %}
-<h2>Analyzed Image</h2>
-{% with path=path%}
-<img src="{% static path %}" style="width: 100%; height: 100%;"/>
-{% endwith %}
-<h2>Detected Ingredients</h2>
-{%for i, n in results%}
-    {% if n == 1 %}
-        <ul>There is {{n}}, {{i}}</ul>
-    {% else %}
-        <ul>There are {{n}}, {{i}}s</ul>
-    {% endif %}
-{%endfor%}
-<a href="{% url 'add_remove_ing' user_id%}">
-    <button type="button" class="delete-button">Next</button>
-</a>
-<a href="{% url 'del_back' user_id %}">
-    <button type="button" class="delete-button">Back</button>
-</a>
+
+<div class="overlay">
+    <!--This class is for the navigation bar which has the logo and the menu options i.e. About us, Browse Recipes...-->
+    <div class="navigation">
+        <div class="logo">
+            <a href="{% url 'back' user_id%}">
+                <img src="/media/logo/image.png" style="width: 20%; height: 10;"> 
+            </a>
+        </div>
+        
+        <ul>
+            <li><a href="#"> ABOUT US </a> </li>
+            <li><a href="{% url 'global' user_id%}"> BROWSE RECIPES </a> </li>
+        </ul>
+    </div>
+
+    <!--This class contains all the functions of this page-->
+    <div class="obj-result">
+        <h2>Analyzed Image</h2>
+        {% with path=path%}
+        <img src="{% static path %}" style="width: 100%; height: 100%;"/>
+        {% endwith %}
+        <h2>Detected Ingredients</h2>
+        {%for i, n in results%}
+        {% if n == 1 %}
+            <ul>There is {{n}}, {{i}}</ul>
+        {% else %}
+            <ul>There are {{n}}, {{i}}s</ul>
+        {% endif %}
+        {%endfor%}
+        <a href="{% url 'add_remove_ing' user_id%}">
+            <button type="button" class="delete-button">Next</button>
+        </a>
+        <a href="{% url 'del_back' user_id %}">
+            <button type="button" class="delete-button">Back</button>
+        </a>
+    </div>
+</div>
+
 {% endblock %}
