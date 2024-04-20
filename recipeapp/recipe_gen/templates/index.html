@@ -7,7 +7,30 @@
     h2{
         font-weight: 500;
         font-family: fantasy;
-        padding: 30px;
+        padding-bottom: 20px;
+        text-align: left;
+    }
+    
+    label{
+        font-family: fantasy;
+        font-weight: 500;
+       
+    }
+
+    ol{
+        text-wrap: pretty;
+        text-align: center;
+
+    }
+
+    h4{
+        text-align: left;
+        padding-bottom: 20px;
+        font-family: fantasy;
+        font-weight: 500;
+    }
+
+    img{
     }
 
 </style>
@@ -38,33 +61,54 @@
             {% endif %}
         </div>
     </div>
-    
-    <!--This class contains all the functions of this page-->
-    <div class="main-main-content">
-        <h2>Upload Image of Ingredients</h2>
-        <form method = "post" enctype="multipart/form-data">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit" name="image" class="delete-button">Upload</button>
-        </form>
-        
-        <h2>Manually Add Ingredients</h2>
-        <h4>Ingredients Currently in Possession</h4>
-        {%for n in ingredients%}
-        <ol>{{n.ingredient_name}}</ol>
-        {% endfor %}
 
-        <form method='POST'>
-            {% csrf_token %}
-            {{form2.as_p}}
-            <button type="submit" name="manual" class="delete-button" value=""> Add</button>
-        </form>
-    
-        <a href="{% url 'images' user_id %}">
-            <button type="button" class="delete-button">Next</button>
-        </a>
+    <div class="edward">
+        <div class="cope">
+        <div class="main-main-content">
+            <!--This class has the upload an image function-->
+            <div class="upload-content">
+                <h2>Upload an Image of the fridge</h2>
+                <form method = "post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" name="image" class="upload-button">Upload</button>
+                </form>
+            </div>
+
+            <div class="manual-content">
+                <h2>Manually Add Ingredients</h2>
+                <h4>Enter the Ingredients in your fridge:</h4>
+
+                <form method='POST'>
+                    {% csrf_token %}
+                    {{form2.as_p}}
+                    {%for n in ingredients%}
+                    <ol class="list-ingredients">{{n.ingredient_name}}</ol>
+                    {% endfor %}
+                    <button type="submit" name="manual" class="add-button-index" value=""> Add</button>
+                </form>
+            </div>
+
+
+        </div>
+
+        <div class="instructions">
+            <h2 class="ins-tit">Instructions</h2>
+
+            <p class="ins-para"> 
+                You can choose to upload an image of your fridge and/or You can manually enter the ingredients you have! 
+                When you are done proceed by clicking "Start Cooking".
+
+                Note: After analysing the image, you can edit the ingredient list to your liking.
+            </p>
+
+            <a href="{% url 'images' user_id %}">
+                <button type="button" class="next-button-index">Start Cooking! </button>
+            </a>
+        </div>
+        </div>
+        <img src="../media/logo/edward.png" class="ed">
     </div>
-
 </div>
 
 {% endblock %}
