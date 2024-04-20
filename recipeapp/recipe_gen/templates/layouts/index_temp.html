@@ -8,10 +8,8 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css'%}?{% now 'U' %}"/>
     <title></title>
 </head>
-<body>
-    <div class="main">
+<body class="overlay">
         {% block content %}
         {% endblock %}
-    </div>
 </body>
 </html>

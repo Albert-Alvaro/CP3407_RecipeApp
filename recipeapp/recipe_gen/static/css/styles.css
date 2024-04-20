@@ -48,6 +48,7 @@ body {
   width: 100%;
   height: auto;
   background-color: rgba(0, 0, 0, 0.2);
+  background-blend-mode: multiply;
   z-index: 1;
   padding: 30px;
 }
