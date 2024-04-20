@@ -28,6 +28,7 @@ def index(request, user_id):
             ingredient = form2.save(commit=False)
             ingredient.save()
             form2 = IngredientForm()
+            return HttpResponseRedirect(f"/index/"+str(user_id))
     else:
         form2 = IngredientForm()
 
