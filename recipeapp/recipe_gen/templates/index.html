@@ -70,19 +70,20 @@
             <div class="manual-content">
                 <h2>Manually Add Ingredients</h2>
                 <h4>Enter the Ingredients in your fridge:</h4>
-
-                <form method='POST'>
-                    {% csrf_token %}
-                    {{form2.as_p}}
-                    {%for n in ingredients%}
+                <br>
+                {%for n in ingredients%}
                     <ol class="list-ingredients">
                         {{n.ingredient_name}}
-                    <a href="{% url 'delete_ingredient' user_id n.ingredient_id%}">
+                    <a href="{% url 'delete_ingredient_index' user_id n.ingredient_id%}">
                         <button type="submit" class="button-del">Delete</button>
                     </a>
             
                     </ol>
-                    {% endfor %}
+                {% endfor %}
+
+                <form method='POST'>
+                    {% csrf_token %}
+                    {{form2.as_p}}
                     <button type="submit" name="manual" class="add-button-index" value=""> Add</button>
                 </form>
             </div>
