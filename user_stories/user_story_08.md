@@ -30,7 +30,7 @@ Mockup: <img src="../user_stories/user_stories_images/us8/Mockup.png">
 <img src="../user_stories/user_stories_images/us8/it1.png">
 
 ## Iteration 3:
-<img src="../user_stories/user_stories_images/us8/it1.png"><br>
+<img src="../user_stories/user_stories_images/us8/it2.png"><br>
  
 
 # Disclaimer
