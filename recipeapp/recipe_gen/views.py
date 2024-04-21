@@ -265,7 +265,7 @@ def delete_image(request, id, user_id):
 def delete_ingredient(request, user_id, ing_id):
     ingredient = Ingredients.objects.get(ingredient_id=ing_id)
     ingredient.delete()
-    return redirect(f"/index/"+str(user_id))
+    return redirect(f"/add_remove_ing/"+str(user_id))
 
 def delete_ingredient_index(request, user_id, ing_id):
     ingredient = Ingredients.objects.get(ingredient_id=ing_id)
