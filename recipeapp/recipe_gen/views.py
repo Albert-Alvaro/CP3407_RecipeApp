@@ -179,7 +179,7 @@ def recipe_page(request, id, user_id):
         review.username = user_data.username
         review.recipe_id = id
         review.save()
-        return HttpResponseRedirect(f"/recipe/"+str(id)+"/"+str(user_id))
+        return HttpResponseRedirect(f"/recipe_page/"+str(id)+"/"+str(user_id))
     print(reviews)
     context = {
         'user_id':user_id,
