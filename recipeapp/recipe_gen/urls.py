@@ -20,6 +20,7 @@ urlpatterns = [
     path('register', views.registration, name='register'),
     path('global/<int:user_id>', views.global_recipe, name='global'),
     path('delete_ingredient/<int:user_id>/<int:ing_id>', views.delete_ingredient, name='delete_ingredient'),
+    path('delete_ingredient_index/<int:user_id>/<int:ing_id>', views.delete_ingredient_index, name='delete_ingredient_index'),
     path('', views.login, name='login') 
 ]
 
