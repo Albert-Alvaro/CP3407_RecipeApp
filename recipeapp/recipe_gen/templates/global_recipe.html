@@ -27,7 +27,9 @@
     <!--This class contains all the functions of this page-->
     <div class="more-more">
         {% for recipe in recipes %}
+        {% autoescape off %}
         <ul>{{recipe.recipe_content}}</ul>
+        {% endautoescape %}
         <a href="{% url 'recipe_page' recipe.recipe_id user_id %}">
             <button type="button" class="button">More</button>
         </a>
