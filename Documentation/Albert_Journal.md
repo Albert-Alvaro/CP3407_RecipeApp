@@ -70,3 +70,7 @@ Usernames are now unique, this is done pretty simply by getting all of the usern
 ### 19/4/2024
 
 Improved the ratings and review system by allowing for there to be multiple reviews and ratings to be left on a single recipe. This was done by revamping the entire form of the ratings and reviews, restructuring the database to accomodate a new entity table specifically for reviews, creating a foreign key to link the recipe and the review, fixed a bug in regards to reviews and ratings being saved whenever the page has been refreshed and to add another flag to ensure that the saved recipes tab is still functional, needed since there is already another flag being in used here for the save button.
+
+### 20/4/2024
+
+Ran tests on the web application and fixed any of the bugs which were found during said tests, also refined and improved upon the code as well. Helped with the refinement of the HTML and CSS, and also created and implemented some of the HTML and CSS for several other pages too. 

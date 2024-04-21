@@ -179,7 +179,7 @@ def recipe_page(request, id, user_id):
         review.username = user_data.username
         review.recipe_id = id
         review.save()
-        return HttpResponseRedirect(f"/recipe/"+str(id)+"/"+str(user_id))
+        return HttpResponseRedirect(f"/recipe_page/"+str(id)+"/"+str(user_id))
     print(reviews)
     context = {
         'user_id':user_id,
@@ -260,12 +260,17 @@ def delete_image(request, id, user_id):
     images = ingredient_images.objects.get(id=id)
     os.remove(f".{images.ingredient_image.url}")
     images.delete()
-    return redirect(f"/index/"+str(user_id))
+    return redirect(f"/images/"+str(user_id))
 
 def delete_ingredient(request, user_id, ing_id):
     ingredient = Ingredients.objects.get(ingredient_id=ing_id)
     ingredient.delete()
     return redirect(f"/add_remove_ing/"+str(user_id))
+
+def delete_ingredient_index(request, user_id, ing_id):
+    ingredient = Ingredients.objects.get(ingredient_id=ing_id)
+    ingredient.delete()
+    return redirect(f"/index/"+str(user_id))
 
 def delete_saved_recipe(request, id, user_id):
     history = Recipe_History.objects.get(recipe_id=id, user_id=user_id)
