@@ -110,3 +110,6 @@ Update this at least once per week
 * 1 weeks left, 5 days of estimated amount of work 
 * 0 weeks left, 3 days of estimated amount of work 
 * Actual Velocity: 3 days
+
+# Disclaimer
+*The iteration board/Kanban Board was made using third-party Software called Trello and information may not be accurate in this MD, for full information please visit <https://trello.com/b/2MlOwEON/fridge-alchemist>*
