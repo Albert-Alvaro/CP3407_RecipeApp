@@ -88,6 +88,7 @@ def add_remove_ingredients(request, user_id):
             ingredient = form.save(commit=False)
             ingredient.save()
             form = IngredientForm
+            return HttpResponseRedirect(f"/add_remove_ing/"+str(user_id))
     else:
         form = IngredientForm
     ingredients = Ingredients.objects.all()
@@ -110,9 +111,9 @@ def llm_results(request, user_id):
     ings = []
     for i in ingredients:
         ings.append(i.ingredient_name)
-    # recipe = LLM.generate_recipe(ings)
-    # formatted_recipe = linebreaksbr(recipe)
-    formatted_recipe = "test2"
+    recipe = LLM.generate_recipe(ings)
+    formatted_recipe = linebreaksbr(recipe)
+    # formatted_recipe = "test2"
     print(formatted_recipe)
     saved_rec = Recipe()
     saved_rec.recipe_content = formatted_recipe

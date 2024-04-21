@@ -3,8 +3,6 @@
 
 {% block content %}
 
-<div class="overlay">
-
     <!--This class is for the navigation bar which has the logo and the menu options i.e. About us, Browse Recipes...-->
     <div class="navigation">
         <div class="logo">
@@ -16,6 +14,13 @@
         <ul>
             <li><a href="#"> ABOUT US </a> </li>
             <li><a href="{% url 'global' user_id%}"> BROWSE RECIPES </a> </li>
+            <li>
+                {% if flag != None %}
+                <a href="{% url 'saved_recipes' user_id%}">
+                    SAVED RECIPES
+                </a>
+                {% endif %}
+            </li>
         </ul>
     </div>
 
@@ -23,19 +28,22 @@
     <!--This class contains all the functions of this page-->
     <div class="result-goofy">
         <h3>Recipe Available</h3>
+        <br>
         {% autoescape off %}
         {{recipe}}
         {% endautoescape %}
-        <a href="{% url 'del_back_ing' user_id%}">
-            <button type="button" class="delete-button">Back</button>
-        </a>
-        
+        <br>
+
         <a href="{% url 'bool-change' saved_rec.recipe_id user_id %}">
-            <button type="button" class="delete-button">Save</button>
+            <button type="button" class="button">Save</button>
+        </a>
+
+        <br>
+
+        <a href="{% url 'del_back_ing' user_id%}">
+            <button type="button" class="button">Back</button>
         </a>
     </div>
-
-</div>
 
 
 

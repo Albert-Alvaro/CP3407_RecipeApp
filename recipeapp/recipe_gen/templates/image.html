@@ -2,8 +2,6 @@
 
 {% block content %}
 
-<div class="overlay">
-
      <!--This class is for the navigation bar which has the logo and the menu options i.e. About us, Browse Recipes...-->
      <div class="navigation">
         <div class="logo">
@@ -15,19 +13,15 @@
         <ul>
             <li><a href="#"> ABOUT US </a> </li>
             <li><a href="{% url 'global' user_id%}"> BROWSE RECIPES </a> </li>
+            <li>
+                {% if flag != None %}
+                <a href="{% url 'saved_recipes' user_id%}">
+                    SAVED RECIPES
+                </a>
+                {% endif %}
+            </li>
         </ul>
     </div>
-
-    <!-- This class is a mystery class which needs to dissolved into the class above so that it can function together-->
-    <nav class="navbar">
-        <div class="main-menu">
-        {% if flag != None %}
-        <a href="{% url 'saved_recipes' user_id%}">
-            <img src="/media/logo/bookmark.png" style="width: 30px ;height: 30px ; position:relative ; display: inline-block ; margin-left: 10px; margin-bottom: 10px;">
-        </a>
-        {% endif %}
-        </div>
-    </nav>
 
     <!--This class contains all the functions of this page-->
     <div class="dis-img">
@@ -35,20 +29,18 @@
         {%for x, y in urls%}
         <ul>
             <a href="{%url 'results' x user_id %}">
-                <img src="{{y}}" style="width: 40%; height: 40%">
+                <img src="{{y}}" style="width: 20%; height: 20%">
             </a>
         </ul>
         
         <a href="{% url 'delete-images' x user_id%}">
-            <button type="button" class="delete-button">Delete</button>
+            <button type="button" class="button">Delete</button>
         </a>
         {% endfor %}
         
         <a href="{% url 'add_remove_ing' user_id %}">
-            <button type="button" class="delete-button">Next</button>
+            <button type="button" class="button">Next</button>
         </a>
     </div>
-
-</div>
 
 {% endblock %}
