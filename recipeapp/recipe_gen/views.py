@@ -260,7 +260,7 @@ def delete_image(request, id, user_id):
     images = ingredient_images.objects.get(id=id)
     os.remove(f".{images.ingredient_image.url}")
     images.delete()
-    return redirect(f"/add_remove_ing/"+str(user_id))
+    return redirect(f"/images/"+str(user_id))
 
 def delete_ingredient(request, user_id, ing_id):
     ingredient = Ingredients.objects.get(ingredient_id=ing_id)
